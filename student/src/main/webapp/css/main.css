@@ -1,0 +1,27 @@
+body {
+	padding: 1px;
+	overflow: auto;
+	min-width: 1300px;
+}
+#div1 {
+	height: 100px;
+	background-image: url('./../image/main/main.jpg');
+	background-size:100% 100%;
+}
+#div2 {
+	width:150px;
+	background-image: url('./../image/main/west.jpg');
+	background-size:100% 100%;
+}
+#content {
+	padding:5px;
+	background-image: url('./../image/main/center.jpg');
+	background-size:100% 100%;
+}
+font {
+	font-size: 15px;
+}
+
+ul {
+	padding-top: 15px;
+}

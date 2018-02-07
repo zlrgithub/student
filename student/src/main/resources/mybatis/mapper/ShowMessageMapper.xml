@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.student.dao.mapper.interfaces.ShowMessageMapper">
+  <resultMap id="BaseResultMap" type="com.student.dao.mapper.bo.ShowMessage">
+    <result column="aa" jdbcType="VARCHAR" property="aa" />
+    <result column="bb" jdbcType="VARCHAR" property="bb" />
+    <result column="cc" jdbcType="VARCHAR" property="cc" />
+    <result column="dd" jdbcType="VARCHAR" property="dd" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    aa, bb, cc, dd
+  </sql>
+  <select id="selectByExample" parameterType="com.student.dao.mapper.bo.ShowMessageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from test
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.student.dao.mapper.bo.ShowMessageExample">
+    delete from test
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.student.dao.mapper.bo.ShowMessage">
+    insert into test (aa, bb, cc, dd
+      )
+    values (#{aa,jdbcType=VARCHAR}, #{bb,jdbcType=VARCHAR}, #{cc,jdbcType=VARCHAR}, #{dd,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.student.dao.mapper.bo.ShowMessage">
+    insert into test
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aa != null">
+        aa,
+      </if>
+      <if test="bb != null">
+        bb,
+      </if>
+      <if test="cc != null">
+        cc,
+      </if>
+      <if test="dd != null">
+        dd,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aa != null">
+        #{aa,jdbcType=VARCHAR},
+      </if>
+      <if test="bb != null">
+        #{bb,jdbcType=VARCHAR},
+      </if>
+      <if test="cc != null">
+        #{cc,jdbcType=VARCHAR},
+      </if>
+      <if test="dd != null">
+        #{dd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.student.dao.mapper.bo.ShowMessageExample" resultType="java.lang.Long">
+    select count(*) from test
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update test
+    <set>
+      <if test="record.aa != null">
+        aa = #{record.aa,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bb != null">
+        bb = #{record.bb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cc != null">
+        cc = #{record.cc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dd != null">
+        dd = #{record.dd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update test
+    set aa = #{record.aa,jdbcType=VARCHAR},
+      bb = #{record.bb,jdbcType=VARCHAR},
+      cc = #{record.cc,jdbcType=VARCHAR},
+      dd = #{record.dd,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.student.dao.mapper.bo.ShowMessage">
+    <result column="major" jdbcType="VARCHAR" property="major" />
+    <result column="school" jdbcType="VARCHAR" property="school" />
+    <result column="work_type" jdbcType="VARCHAR" property="workType" />
+    <result column="workspace" jdbcType="VARCHAR" property="workspace" />
+    <result column="work" jdbcType="VARCHAR" property="work" />
+    <result column="perf_standards" jdbcType="VARCHAR" property="perfStandards" />
+    <result column="is_major" jdbcType="INTEGER" property="isMajor" />
+    <result column="is_local" jdbcType="INTEGER" property="isLocal" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    major, school, work_type, workspace, work, perf_standards, is_major, is_local
+  </sql>
+  <select id="selectByExample" parameterType="com.student.dao.mapper.bo.ShowMessageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from show_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.student.dao.mapper.bo.ShowMessageExample">
+    delete from show_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.student.dao.mapper.bo.ShowMessage">
+    insert into show_message (major, school, work_type, 
+      workspace, work, perf_standards, 
+      is_major, is_local)
+    values (#{major,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{workType,jdbcType=VARCHAR}, 
+      #{workspace,jdbcType=VARCHAR}, #{work,jdbcType=VARCHAR}, #{perfStandards,jdbcType=VARCHAR}, 
+      #{isMajor,jdbcType=INTEGER}, #{isLocal,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.student.dao.mapper.bo.ShowMessage">
+    insert into show_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="major != null">
+        major,
+      </if>
+      <if test="school != null">
+        school,
+      </if>
+      <if test="workType != null">
+        work_type,
+      </if>
+      <if test="workspace != null">
+        workspace,
+      </if>
+      <if test="work != null">
+        work,
+      </if>
+      <if test="perfStandards != null">
+        perf_standards,
+      </if>
+      <if test="isMajor != null">
+        is_major,
+      </if>
+      <if test="isLocal != null">
+        is_local,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null">
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="workType != null">
+        #{workType,jdbcType=VARCHAR},
+      </if>
+      <if test="workspace != null">
+        #{workspace,jdbcType=VARCHAR},
+      </if>
+      <if test="work != null">
+        #{work,jdbcType=VARCHAR},
+      </if>
+      <if test="perfStandards != null">
+        #{perfStandards,jdbcType=VARCHAR},
+      </if>
+      <if test="isMajor != null">
+        #{isMajor,jdbcType=INTEGER},
+      </if>
+      <if test="isLocal != null">
+        #{isLocal,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.student.dao.mapper.bo.ShowMessageExample" resultType="java.lang.Long">
+    select count(*) from show_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update show_message
+    <set>
+      <if test="record.major != null">
+        major = #{record.major,jdbcType=VARCHAR},
+      </if>
+      <if test="record.school != null">
+        school = #{record.school,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workType != null">
+        work_type = #{record.workType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workspace != null">
+        workspace = #{record.workspace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.work != null">
+        work = #{record.work,jdbcType=VARCHAR},
+      </if>
+      <if test="record.perfStandards != null">
+        perf_standards = #{record.perfStandards,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isMajor != null">
+        is_major = #{record.isMajor,jdbcType=INTEGER},
+      </if>
+      <if test="record.isLocal != null">
+        is_local = #{record.isLocal,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update show_message
+    set major = #{record.major,jdbcType=VARCHAR},
+      school = #{record.school,jdbcType=VARCHAR},
+      work_type = #{record.workType,jdbcType=VARCHAR},
+      workspace = #{record.workspace,jdbcType=VARCHAR},
+      work = #{record.work,jdbcType=VARCHAR},
+      perf_standards = #{record.perfStandards,jdbcType=VARCHAR},
+      is_major = #{record.isMajor,jdbcType=INTEGER},
+      is_local = #{record.isLocal,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

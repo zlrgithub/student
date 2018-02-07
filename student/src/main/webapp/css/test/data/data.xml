@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<data>
+	<settings>
+	<colors>0xffff66,0xff9900,0xcc9909</colors>
+	<radian>0.785</radian>
+	<type>linear</type>
+	</settings>
+	<area id="beijing" name="北京" mouseEnabled= "true" url="http://www.16css.com/" />
+	<area id="tianjin" name="天津"   mouseEnabled= "true" url="http://www.16css.com/" />
+	<area id="xinjiang" name="新疆" mouseEnabled= "true" url="http://www.16css.com/" />
+	<area id="xizang" name="西藏"  mouseEnabled= "true" url="http://www.16css.com/" />
+	<area id="qinghai" name="青海"  mouseEnabled= "true" url="http://www.16css.com/" />
+	<area id="gansu" name="甘肃"  mouseEnabled= "f" url="http://www.16css.com/" />
+	<area id="neimenggu" name="内蒙古"  mouseEnabled= "f" url="http://www.16css.com/" />
+	<area id="ningxia" name="宁夏"   mouseEnabled= "f" url="" />
+	<area id="shanxi" name="山西"  mouseEnabled= "f" url="http://www.16css.com/"  />
+	<area id="liaoning" name="辽宁"  mouseEnabled= "true" url=""  />
+	<area id="jilin" name="吉林"  mouseEnabled= "true" url=""  />
+	<area id="heilongjiang" name="黑龙江"   mouseEnabled= "true" url="" />
+	<area id="hebei" name="河北"   mouseEnabled= "true" url="" />
+	<area id="shandong" name="山东"  mouseEnabled= "true" url="http://www.16css.com/"  />
+	<area id="henan" name="河南"  mouseEnabled= "true" url=""  />
+	<area id="shannxi" name="陕西"  mouseEnabled= "true" url=""  />
+	<area id="sichuan" name="四川"   mouseEnabled= "true" url="" />
+	<area id="chongqing" name="重庆"  mouseEnabled= "true" url="http://www.16css.com/" />
+	<area id="hubei" name="湖北"  mouseEnabled= "true" url="http://www.16css.com/"  />
+	<area id="anhui" name="安徽"  mouseEnabled= "true" url=""  />
+	<area id="jiangsu" name="江苏"  mouseEnabled= "true" url="" />
+	<area id="shanghai" name="上海" mouseEnabled= "true" url="http://www.16css.com/" />
+	<area id="zhejiang" name="浙江"   mouseEnabled= "true" url="" />
+	<area id="fujian" name="福建"  mouseEnabled= "true" url="http://www.16css.com/" />
+	<area id="taiwan" name="台湾"  mouseEnabled= "true" url=""  />
+	<area id="jiangxi" name="江西"  mouseEnabled= "true" url="http://www.16css.com/"  />
+	<area id="hunan" name="湖南"  mouseEnabled= "true" url=""  />
+	<area id="guizhou" name="贵州"  mouseEnabled= "true" url="http://www.16css.com/"  />
+	<area id="guangxi" name="广西"  mouseEnabled= "true" url=""  />
+	<area id="guangdong" name="广东"  mouseEnabled= "true" url="http://www.16css.com/"  />
+	<area id="xianggang" name="香港"   mouseEnabled= "true" url="" />
+	<area id="aomen" name="澳门"  mouseEnabled= "true" url="http://www.16css.com/"  />
+	<area id="hainan" name="海南"  mouseEnabled= "true" url=""  />
+	<area id="yunnan" name="云南"  mouseEnabled= "true" url="http://www.16css.com/"  />
+</data>

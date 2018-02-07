@@ -1,0 +1,34 @@
+地图可以自定义背景颜色，请修改xml文件里的settings包含的参数，为防止出错，勿修改原来的格式
+<settings>
+<colors>0xffff66,0xff9900,0xcc9909</colors>      //十六进制颜色，个数小于或等于15个（这里有3个，之间用英文的逗号隔开）
+<radian>0.785</radian>                          //渐变的弧度值
+<type>linear</type>                            //渐变类型，两种选择linear或radial 
+</settings>
+
+详细请参见 flash.display.Graphics类的beginGradientFill () 方法 
+
+
+
+若要捕获鼠标点击，请注册MapEvent.SELECT事件，如chinaMap.addEventListener(MapEvent.SELECT,Func);
+该事件含有参数value即为data.xml里各省份对应的id,捕获事件后可以访问 e.value
+
+
+
+
+chinaMap.addEventListener(MapEvent.SELECT,Func)
+
+function Func(e:MapEvent)
+{
+	trace(e.value)
+}
+
+
+
+你也可以限制某些省份的鼠标事件，请修改xml里的 mouseEnabled的值-- ture为支持鼠标，其余值鼠标无效，且区域颜色有些不同
+
+若url的值不为空，则点击后会打开新的链接，这里没有检查 网址的有效性，请确保输入的网址存在。
+
+name的值不可修改，否则地图无法正常显示，id可以随意更改，它只是点击之后传递的数值，按上面给出的方法可以获取
+
+
+请勿用于商业行为
