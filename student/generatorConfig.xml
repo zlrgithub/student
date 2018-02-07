@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  <!-- 数据库驱动 -->  
+  <classPathEntry location="C:\Users\acer\.m2\repository\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar" />
+  <context id="context1" targetRuntime="MyBatis3">
+  	<!-- 禁用mybatis插件自动生成的注释 -->  
+	<commentGenerator>
+		<property name="suppressDate" value="true" />
+		<property name="suppressAllComments" value="true" />
+	</commentGenerator>
+	
+	<!-- 数据库连接串配置 -->  
+    <jdbcConnection 
+    	connectionURL="jdbc:mysql://localhost:3306/student" 
+    	driverClass="com.mysql.jdbc.Driver" 
+    	password="zlr968" userId="root" />
+    	
+    <!-- 类型转换器 --> 
+	<javaTypeResolver type="org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl">
+        <!-- 
+            true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型
+            false：默认,
+                scale>0;length>18：使用BigDecimal;
+                scale=0;length[10,18]：使用Long；
+                scale=0;length[5,9]：使用Integer；
+                scale=0;length<5：使用Short；
+         -->
+        <property name="forceBigDecimals" value="false"/>
+    </javaTypeResolver>
+    
+    <!-- java实体类配置 -->  	
+    <javaModelGenerator 
+    	targetPackage="com.student.dao.mapper.bo" 
+    	targetProject="student/src/main/java" />
+    
+    <!-- sqlMap映射xml配置 -->  
+    <sqlMapGenerator 
+    	targetPackage="mybatis.mapper" 
+    	targetProject="student/src/main/resources" />
+   <!-- mybatis接口类配置 -->   	
+    <javaClientGenerator 
+    	targetPackage="com.student.dao.mapper.interfaces" 
+    	targetProject="student/src/main/java" 
+    	type="XMLMAPPER" />
+    	
+    	
+   <!--  <table tableName="T_M_USER" enableCountByExample="true"
+			enableUpdateByExample="true" enableDeleteByExample="true"
+			enableSelectByExample="true" selectByExampleQueryId="false" />	 -->
+<!-- 
+	<table tableName="OPS_DW_KPI_D" enableCountByExample="true"
+		enableUpdateByExample="true" enableDeleteByExample="true"
+		enableSelectByExample="true" selectByExampleQueryId="false" 
+		 domainObjectName="DwKpiD" />
+	<table tableName="OPS_DW_KPI_M" enableCountByExample="true"
+		enableUpdateByExample="true" enableDeleteByExample="true"
+		enableSelectByExample="true" selectByExampleQueryId="false" 
+		 domainObjectName="DwKpiM" />
+	<table tableName="OPS_DW_CHLLVLKPI_D" enableCountByExample="true"
+		enableUpdateByExample="true" enableDeleteByExample="true"
+		enableSelectByExample="true" selectByExampleQueryId="false" 
+		 domainObjectName="DwChlLvlKkpiD" />
+	<table tableName="OPS_DW_CHLLVLKPI_M" enableCountByExample="true"
+		enableUpdateByExample="true" enableDeleteByExample="true"
+		enableSelectByExample="true" selectByExampleQueryId="false"
+		 domainObjectName="DwChlLvlKpiM" />
+		 <table tableName="OPS_DW_LAST_DATA_TIME" enableCountByExample="true"
+		enableUpdateByExample="true" enableDeleteByExample="true"
+		enableSelectByExample="true" selectByExampleQueryId="false"
+		 domainObjectName="DWLastDataTime" />
+		  -->
+	<!-- <table tableName="user"
+		enableCountByExample="true" enableUpdateByExample="true"
+		enableDeleteByExample="true" enableSelectByExample="true"
+		selectByExampleQueryId="false" 
+		domainObjectName="User" /> -->
+	<!-- <table tableName="user_message"
+		enableCountByExample="true" enableUpdateByExample="true"
+		enableDeleteByExample="true" enableSelectByExample="true"
+		selectByExampleQueryId="false" 
+		domainObjectName="UserMessage" /> -->
+	<!-- <table tableName="index_message"
+		enableCountByExample="true" enableUpdateByExample="true"
+		enableDeleteByExample="true" enableSelectByExample="true"
+		selectByExampleQueryId="false" 
+		domainObjectName="IndexMessage" />
+	<table tableName="show_message"
+		enableCountByExample="true" enableUpdateByExample="true"
+		enableDeleteByExample="true" enableSelectByExample="true"
+		selectByExampleQueryId="false" 
+		domainObjectName="ShowMessage" /> -->
+  </context>
+</generatorConfiguration>
