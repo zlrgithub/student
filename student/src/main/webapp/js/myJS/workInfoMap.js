@@ -1,4 +1,36 @@
+function getWorkInfo(){
+	var infoList = new Array();
+	var workInfo = new Array();
+	var unknowInfo = new Array();
+	var continueInfo = new Array();
+	$(document).ready(function(){
+		$().ready(function(){
+			$.ajaxSettings.async = false;
+			$.post("workInfoMap.do","",function(data,status){
+				var jsonObj = JSON.parse( data ); 
+				for(var j = 0 ; j < jsonObj.infoMapList.length ; j++ ){
+						workInfo[j] = {name: jsonObj.infoMapList[j].name,value: jsonObj.infoMapList[j].value};
+						unknowInfo[j] = {name: jsonObj.unknowList[j].name,value: jsonObj.unknowList[j].value};
+						continueInfo[j] = {name: jsonObj.continueList[j].name,value: jsonObj.continueList[j].value};
+				}
+			});
+			$.ajaxSettings.async = true;
+		});
+	});
+	infoList.push(workInfo)
+	infoList.push(unknowInfo)
+	infoList.push(continueInfo)
+	return infoList;
+}
+function as(){
+	var sss=new Array();
+	sss=[{name: '北京',value: Math.round(Math.random()*1000)},{name: '澳门',value: Math.round(Math.random()*1000)}];
+	return sss;
+} 
 function showmap(){
+		//加载数据开始
+		//var datas=[100,200];
+		//加载数据结束
 		var myChart = echarts.init(document.getElementById('main'));
 		var option = {
 		    title : {
@@ -21,27 +53,8 @@ function showmap(){
 		        text:['高','低'],           // 文本，默认为数值文本
 		        calculable : true
 		    },
-		    /*toolbox: {
-		        show: true,
-		        orient : 'vertical',
-		        x: 'right',
-		        y: 'center',
-		        feature : {
-		            mark : {show: true},
-		            dataView : {show: true, readOnly: false},
-		            restore : {show: true},
-		            saveAsImage : {show: true}
-		        }
-		    },*/
-		   /* roamController: {
-		        show: true,
-		        x: 'right',
-		        mapTypeControl: {
-		            'china': true
-		        }
-		    },*/
 		    series : [
-		        {
+		           {
 		            name: '就业',
 		            type: 'map',
 		            mapType: 'china',
@@ -50,42 +63,7 @@ function showmap(){
 		                normal:{label:{show:true}},
 		                emphasis:{label:{show:true}}
 		            },
-		            data:[
-		                {name: '北京',value: Math.round(Math.random()*1000)},
-		                {name: '天津',value: Math.round(Math.random()*1000)},
-		                {name: '上海',value: Math.round(Math.random()*1000)},
-		                {name: '重庆',value: Math.round(Math.random()*1000)},
-		                {name: '河北',value: Math.round(Math.random()*1000)},
-		                {name: '河南',value: Math.round(Math.random()*1000)},
-		                {name: '云南',value: Math.round(Math.random()*1000)},
-		                {name: '辽宁',value: Math.round(Math.random()*1000)},
-		                {name: '黑龙江',value: Math.round(Math.random()*1000)},
-		                {name: '湖南',value: Math.round(Math.random()*1000)},
-		                {name: '安徽',value: Math.round(Math.random()*1000)},
-		                {name: '山东',value: Math.round(Math.random()*1000)},
-		                {name: '新疆',value: Math.round(Math.random()*1000)},
-		                {name: '江苏',value: Math.round(Math.random()*1000)},
-		                {name: '浙江',value: Math.round(Math.random()*1000)},
-		                {name: '江西',value: Math.round(Math.random()*1000)},
-		                {name: '湖北',value: Math.round(Math.random()*1000)},
-		                {name: '广西',value: Math.round(Math.random()*1000)},
-		                {name: '甘肃',value: Math.round(Math.random()*1000)},
-		                {name: '山西',value: Math.round(Math.random()*1000)},
-		                {name: '内蒙古',value: Math.round(Math.random()*1000)},
-		                {name: '陕西',value: Math.round(Math.random()*1000)},
-		                {name: '吉林',value: Math.round(Math.random()*1000)},
-		                {name: '福建',value: Math.round(Math.random()*1000)},
-		                {name: '贵州',value: Math.round(Math.random()*1000)},
-		                {name: '广东',value: Math.round(Math.random()*1000)},
-		                {name: '青海',value: Math.round(Math.random()*1000)},
-		                {name: '西藏',value: Math.round(Math.random()*1000)},
-		                {name: '四川',value: Math.round(Math.random()*1000)},
-		                {name: '宁夏',value: Math.round(Math.random()*1000)},
-		                {name: '海南',value: Math.round(Math.random()*1000)},
-		                {name: '台湾',value: Math.round(Math.random()*1000)},
-		                {name: '香港',value: Math.round(Math.random()*1000)},
-		                {name: '澳门',value: Math.round(Math.random()*1000)}
-		            ]
+		            data: []
 		        },
 		        {
 		            name: '继续深造',
@@ -95,27 +73,7 @@ function showmap(){
 		                normal:{label:{show:true}},
 		                emphasis:{label:{show:true}}
 		            },
-		            data:[
-		                {name: '北京',value: Math.round(Math.random()*1000)},
-		                {name: '天津',value: Math.round(Math.random()*1000)},
-		                {name: '上海',value: Math.round(Math.random()*1000)},
-		                {name: '重庆',value: Math.round(Math.random()*1000)},
-		                {name: '河北',value: Math.round(Math.random()*1000)},
-		                {name: '安徽',value: Math.round(Math.random()*1000)},
-		                {name: '新疆',value: Math.round(Math.random()*1000)},
-		                {name: '浙江',value: Math.round(Math.random()*1000)},
-		                {name: '江西',value: Math.round(Math.random()*1000)},
-		                {name: '山西',value: Math.round(Math.random()*1000)},
-		                {name: '内蒙古',value: Math.round(Math.random()*1000)},
-		                {name: '吉林',value: Math.round(Math.random()*1000)},
-		                {name: '福建',value: Math.round(Math.random()*1000)},
-		                {name: '广东',value: Math.round(Math.random()*1000)},
-		                {name: '西藏',value: Math.round(Math.random()*1000)},
-		                {name: '四川',value: Math.round(Math.random()*1000)},
-		                {name: '宁夏',value: Math.round(Math.random()*1000)},
-		                {name: '香港',value: Math.round(Math.random()*1000)},
-		                {name: '澳门',value: Math.round(Math.random()*1000)}
-		            ]
+		            data:[]
 		        },
 		        {
 		            name: '未确定',
@@ -125,26 +83,33 @@ function showmap(){
 		                normal:{label:{show:true}},
 		                emphasis:{label:{show:true}}
 		            },
-		            data:[
-		                {name: '北京',value: Math.round(Math.random()*1000)},
-		                {name: '天津',value: Math.round(Math.random()*1000)},
-		                {name: '上海',value: Math.round(Math.random()*1000)},
-		                {name: '广东',value: Math.round(Math.random()*1000)},
-		                {name: '台湾',value: Math.round(Math.random()*1000)},
-		                {name: '香港',value: Math.round(Math.random()*1000)},
-		                {name: '澳门',value: Math.round(Math.random()*1000)}
-		            ]
+		            data:[]
 		        }
 		    ]
 		};
- 		myChart.setOption(option);
- 		
- 		myChart.on('click', function (params) { 
- 			
+		
+		//加载异步数据
+		var  nidsye1 = new Array();
+		nidsye1.push(getWorkInfo());
+		option.series[0].data=nidsye1[0][0]//设置data
+		option.series[1].data=nidsye1[0][1]
+		option.series[2].data=nidsye1[0][2]
+ 		myChart.setOption(option);//加载option
+		
+ 		myChart.on('click', function (params) {
  			console.log(params);
+ 			$().ready(function(){
+ 				$.post("cityInfo",
+ 						{
+ 							cityName:params.name
+ 						},
+ 						function(data,status){
+ 							window.location.href="http://localhost:8080/student/showMessage/cityInfo"
+ 							//parent.window.document.getElementById("showView").src="http://localhost:8080/student/showMessage/cityInfo"
+ 				});
+ 			});
  			
- 			
- 			
+ 				
  		});	
  		
-		}
+}
