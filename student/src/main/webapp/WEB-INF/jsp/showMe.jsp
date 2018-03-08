@@ -25,46 +25,39 @@
 		</div>
 		<br><br>
 		<div align="left" style="width: 100%;height:400px; ;float: left;">
-			<div style="width: 30%;height:20%;">
+
+			<div style="float: left;width: 30%;">
 				<table class="tables">
 						<tr>
-							<td>用户编码：</td>
+							<td>账号：</td>
 							<td id="tb1"></td>
 						</tr>
 						<tr>
-							<td>用户名：</td>
+							<td>姓名：</td>
 							<td id="tb2"></td>
 						</tr>
-				</table>
-			</div>
-			<div style="float: left;width: 30%;">
-				<table class="tables">
 						<tr>
-							<td>学校名称：</td>
+							<td>性别：</td>
 							<td id="tb3"></td>
 						</tr>
 						<tr>
-							<td>专业：</td>
+							<td>学校名称：</td>
 							<td id="tb4"></td>
 						</tr>
 						<tr>
-							<td>专业水平：</td>
+							<td>毕业年份：</td>
 							<td id="tb5"></td>
 						</tr>
-				</table>
-			</div>
-			<div style="float: left;width: 30%;">
-				<table class="tables">
 						<tr>
-							<td>工作地：</td>
+							<td>是否重点高校：</td>
 							<td id="tb6"></td>
 						</tr>
 						<tr>
-							<td>工作：</td>
+							<td>专业：</td>
 							<td id="tb7"></td>
 						</tr>
 						<tr>
-							<td>工作类型：</td>
+							<td>专业水平(绩点)：</td>
 							<td id="tb8"></td>
 						</tr>
 				</table>
@@ -72,12 +65,56 @@
 			<div style="float: left;width: 30%;">
 				<table class="tables">
 						<tr>
-							<td>是否本专业：</td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>工作地：</td>
 							<td id="tb9"></td>
 						</tr>
 						<tr>
-							<td>是否在本地：</td>
+							<td>城市类型：</td>
 							<td id="tb10"></td>
+						</tr>
+						<tr>
+							<td>工作：</td>
+							<td id="tb11"></td>
+						</tr>
+						<tr>
+							<td>是否本专业：</td>
+							<td id="tb12"></td>
+						</tr>
+						<tr>
+							<td>薪资：</td>
+							<td id="tb13"></td>
+						</tr>
+						<tr>
+							<td>公司类型：</td>
+							<td id="tb14"></td>
+						</tr>
+				</table>
+			</div>
+			<div style="float: left;width: 30%;">
+				<table class="tables">
+						<tr>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>实习时长(月)：</td>
+							<td id="tb15"></td>
+						</tr>
+						<tr>
+							<td>求职方式：</td>
+							<td id="tb16"></td>
 						</tr>
 				</table>
 			</div>
