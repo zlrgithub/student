@@ -7,5 +7,4 @@ import com.student.dao.mapper.bo.User;
 public interface UserInsert {
 	int insert(User user);
 	List<User> login(User user);
-	List<User> selectUserId();
 }

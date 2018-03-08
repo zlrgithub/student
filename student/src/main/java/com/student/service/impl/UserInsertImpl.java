@@ -27,13 +27,9 @@ public class UserInsertImpl implements UserInsert {
 	@Override
 	public List<User> login(User user) {
 		Map<String, String> param  = new HashMap<>();
-		param.put("userName", "AND USER_NAME = \'" + user.getUserName() + "\'" );
-		param.put("password", "AND PASSWORD = \'" + user.getPassword() + "\'" );
-		return userMapper.userExample(param);
-	}
-	@Override
-	public List<User> selectUserId() {
-		return userMapper.selectMaxUserId();
+		param.put("userName",user.getUserName());
+		param.put("password",user.getPassword());
+		return userMapper.login(param);
 	}
 	
 }
