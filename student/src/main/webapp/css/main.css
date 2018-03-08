@@ -13,9 +13,9 @@ body {
 	background-image: url('./../image/main/west.jpg');
 	background-size:100% 100%;
 }
-#content {
+#showView {
 	padding:5px;
-	background-image: url('./../image/main/center.jpg');
+    background-image: url('./../image/main/center.jpg');
 	background-size:100% 100%;
 }
 font {

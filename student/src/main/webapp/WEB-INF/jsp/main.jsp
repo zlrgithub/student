@@ -33,7 +33,7 @@
 		</div>
 		<div id="content" region="center" title=" ">
 			<iframe id = "showView" src ='http://localhost:8080/student/showMessage/showMain' 
-				style="width: 100%;height: 100%;border: 0px;">
+				style="width: 98%;height: 98%;border: 0px;">
 			</iframe>
 		</div>
 	</div>
