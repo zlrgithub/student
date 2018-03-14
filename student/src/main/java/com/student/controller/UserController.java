@@ -1,6 +1,7 @@
 package com.student.controller;
   
 import java.io.IOException;
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -37,12 +38,15 @@ import javafx.scene.control.Alert;
 @Controller  
 @RequestMapping("/user")  
 public class UserController {  
-	private User user;
-	private UserMessage userMessage;
+	
 	@Autowired
 	private UserInsert userInsert;
+	
 	@Autowired
 	private IUserMessage iUserMessage;
+	
+	private User user;
+	private UserMessage userMessage;
 	Date date = new Date();
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyymmdd");
 	
@@ -52,15 +56,14 @@ public class UserController {
         return "register"; 
     }
     @RequestMapping("/regeist")
-    public void insert(HttpServletRequest request,Model model,HttpServletResponse response){
-    	List<User> maxUserId = userInsert.selectUserId();
+    public void insert(HttpServletRequest request,HttpServletResponse response){
     	String name = request.getParameter("name");
     	String password = request.getParameter("password");
     	user = new User();
+    	user.setUserId(name);
     	user.setUserName(name);
-    	user.setIsOff(0);
     	user.setPassword(password);
-    	user.setUserId(maxUserId.get(0).getUserId()+1);
+    	user.setIsOff(0);
     	user.setCreateDate(dateFormat.format(date));
     	userInsert.insert(user);
     	try {
@@ -109,8 +112,8 @@ public class UserController {
     		isLocal = "2";
     	}
     	userMessage = new UserMessage();
-    	userMessage.setStudentId(0);
-    	userMessage.setUserId(Integer.valueOf(userId));
+    	userMessage.setStudentId("0");
+    	userMessage.setUserId(userId);
     	userMessage.setSchool(school);
     	userMessage.setMajor(major);
     	userMessage.setPrefStandards(prefStandards);
@@ -143,33 +146,58 @@ public class UserController {
     	}
     	ObjectMapper mapper = new ObjectMapper();
     	UserMessageExample example =new UserMessageExample();
-    	example.createCriteria().andUserIdEqualTo(Integer.valueOf(name));
+    	example.createCriteria().andUserIdEqualTo(name);
     	UserMessage message = new UserMessage();
     	String string=null;
     	try {
 			String req = mapper.writeValueAsString(example);
 			List<UserMessage> userInfo= iUserMessage.select(req);
+			
 			if( !userInfo.isEmpty() ){
+				
+				 //message.setStudentId(userInfo.get(0).getStudentId());
+				 message.setUserId(name);
+				 message.setUsername(userInfo.get(0).getUsername());
+				 message.setSex(userInfo.get(0).getSex());
+				 
 				 message.setSchool(userInfo.get(0).getSchool()); 
-			     message.setStudentId(userInfo.get(0).getStudentId());
-			     message.setCompanyType(userInfo.get(0).getCompanyType());
+				 message.setGraTime(userInfo.get(0).getGraTime());
+				 message.setIsTopSchool(userInfo.get(0).getIsTopSchool()); 
+				 message.setMajor(userInfo.get(0).getMajor());
+				 message.setPrefStandards(userInfo.get(0).getPrefStandards());
+				 
+				 message.setWorkspace(userInfo.get(0).getWorkspace());
+				 message.setCityType(userInfo.get(0).getCityType());
+				 message.setWork(userInfo.get(0).getWork());
 			     message.setIsMajor(userInfo.get(0).getIsMajor());
-			     message.setMajor(userInfo.get(0).getMajor());
-			     message.setPrefStandards(userInfo.get(0).getPrefStandards());
-			     message.setWork(userInfo.get(0).getWork());
-			     message.setUserId(userInfo.get(0).getUserId());
-			     message.setWorkspace(userInfo.get(0).getWorkspace());
+			     message.setSalary(userInfo.get(0).getSalary());
+			     message.setCompanyType(userInfo.get(0).getCompanyType());
+			     
+			     message.setIsTrain(userInfo.get(0).getIsTrain());
+			     message.setWayOfOffer(userInfo.get(0).getWayOfOffer()); 
+			     
 			     string = JSON.toJSONString(message);
 			}else{
+				 //message.setStudentId(name);
+				 message.setUserId(name);
+				 message.setUsername("");
+				 message.setSex("");
+				 
 				 message.setSchool(""); 
-			     message.setStudentId(null);
-			     message.setCompanyType(1);
+				 message.setGraTime(null);
+				 message.setIsTopSchool(""); 
+				 message.setMajor("");
+				 message.setPrefStandards("");
+				 
+				 message.setWorkspace("");
+				 message.setCityType("");
+				 message.setWork("");
 			     message.setIsMajor(null);
-			     message.setMajor("");
-			     message.setPrefStandards("");
-			     message.setWork("");
-			     message.setUserId(Integer.valueOf(name));
-			     message.setWorkspace("");
+			     message.setSalary(null);
+			     message.setCompanyType(null);
+			     
+			     message.setIsTrain("");
+			     message.setWayOfOffer(null); 
 			     string = JSON.toJSONString(message);
 			}
 		} catch (JsonGenerationException e) {
@@ -186,7 +214,7 @@ public class UserController {
     	//@ResponseBody Object
     	ObjectMapper mapper = new ObjectMapper();
     	UserMessageExample example =new UserMessageExample();
-    	example.createCriteria().andStudentIdEqualTo(Integer.valueOf(request.getParameter("studentId")));
+    	example.createCriteria().andStudentIdEqualTo(request.getParameter("userId"));
     	try {
 			String req = mapper.writeValueAsString(example);
 			iUserMessage.delete(req);
@@ -197,16 +225,28 @@ public class UserController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    	
-    	userMessage = new UserMessage();
-    	userMessage.setSchool(request.getParameter("school")); 
-    	userMessage.setStudentId(Integer.valueOf(request.getParameter("studentId")));
-    	userMessage.setIsMajor(Integer.valueOf(request.getParameter("isMajor")));
-        userMessage.setMajor(request.getParameter("major"));
-        userMessage.setPrefStandards(request.getParameter("prefStandard"));
-        userMessage.setWork(request.getParameter("work"));
-        userMessage.setUserId(Integer.valueOf(request.getParameter("username")));
-        userMessage.setWorkspace(request.getParameter("workspace"));
+    	 userMessage = new UserMessage();
+    	 userMessage.setStudentId(request.getParameter("userId"));
+		 userMessage.setUserId(request.getParameter("userId"));
+		 userMessage.setUsername(request.getParameter("username"));
+		 userMessage.setSex(request.getParameter("sex"));
+		 
+		 userMessage.setSchool(request.getParameter("school")); 
+		 userMessage.setGraTime(Integer.valueOf(request.getParameter("graTime"))); 
+		 userMessage.setIsTopSchool(request.getParameter("isTopSchool")); 
+		 userMessage.setMajor(request.getParameter("major"));
+		 userMessage.setPrefStandards(request.getParameter("prefStandard"));
+		 
+		 userMessage.setWorkspace(request.getParameter("workspace"));
+		 userMessage.setCityType(request.getParameter("cityType"));
+		 userMessage.setWork(request.getParameter("work"));
+	     userMessage.setIsMajor(Integer.valueOf(request.getParameter("isMajor")));
+	     userMessage.setSalary(Integer.valueOf(request.getParameter("salary")));
+	     System.out.println(request.getParameter("companyType"));
+	     userMessage.setCompanyType(Integer.valueOf(request.getParameter("companyType")));
+	     
+	     userMessage.setIsTrain(request.getParameter("isTrain"));
+	     userMessage.setWayOfOffer(Integer.valueOf(request.getParameter("wayOfOffer"))); 
 		iUserMessage.insert(userMessage);
         return "success";  
     } 

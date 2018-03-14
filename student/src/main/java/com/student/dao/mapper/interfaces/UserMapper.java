@@ -5,8 +5,6 @@ import com.student.dao.mapper.bo.UserExample;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.criteria.CriteriaBuilder.In;
-
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
@@ -14,7 +12,7 @@ public interface UserMapper {
 
     int deleteByExample(UserExample example);
 
-    int deleteByPrimaryKey(Integer userId);
+    int deleteByPrimaryKey(String userId);
 
     int insert(User record);
 
@@ -22,7 +20,7 @@ public interface UserMapper {
 
     List<User> selectByExample(UserExample example);
 
-    User selectByPrimaryKey(Integer userId);
+    User selectByPrimaryKey(String userId);
 
     int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 
@@ -31,8 +29,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
-    
-    //---------------------------自定义sql
-    List<User> userExample(Map<String, String> record);
-    List<User> selectMaxUserId();
+
+	List<User> login(Map<String, String> param);
 }

@@ -44,51 +44,35 @@
     	targetProject="student/src/main/java" 
     	type="XMLMAPPER" />
     	
-    	
-   <!--  <table tableName="T_M_USER" enableCountByExample="true"
-			enableUpdateByExample="true" enableDeleteByExample="true"
-			enableSelectByExample="true" selectByExampleQueryId="false" />	 -->
-<!-- 
-	<table tableName="OPS_DW_KPI_D" enableCountByExample="true"
-		enableUpdateByExample="true" enableDeleteByExample="true"
-		enableSelectByExample="true" selectByExampleQueryId="false" 
-		 domainObjectName="DwKpiD" />
-	<table tableName="OPS_DW_KPI_M" enableCountByExample="true"
-		enableUpdateByExample="true" enableDeleteByExample="true"
-		enableSelectByExample="true" selectByExampleQueryId="false" 
-		 domainObjectName="DwKpiM" />
-	<table tableName="OPS_DW_CHLLVLKPI_D" enableCountByExample="true"
-		enableUpdateByExample="true" enableDeleteByExample="true"
-		enableSelectByExample="true" selectByExampleQueryId="false" 
-		 domainObjectName="DwChlLvlKkpiD" />
-	<table tableName="OPS_DW_CHLLVLKPI_M" enableCountByExample="true"
-		enableUpdateByExample="true" enableDeleteByExample="true"
-		enableSelectByExample="true" selectByExampleQueryId="false"
-		 domainObjectName="DwChlLvlKpiM" />
-		 <table tableName="OPS_DW_LAST_DATA_TIME" enableCountByExample="true"
-		enableUpdateByExample="true" enableDeleteByExample="true"
-		enableSelectByExample="true" selectByExampleQueryId="false"
-		 domainObjectName="DWLastDataTime" />
-		  -->
-	<!-- <table tableName="user"
+	 <table tableName="user"
 		enableCountByExample="true" enableUpdateByExample="true"
 		enableDeleteByExample="true" enableSelectByExample="true"
 		selectByExampleQueryId="false" 
-		domainObjectName="User" /> -->
-	<!-- <table tableName="user_message"
+		domainObjectName="User" /> 
+	 <table tableName="user_message"
 		enableCountByExample="true" enableUpdateByExample="true"
 		enableDeleteByExample="true" enableSelectByExample="true"
 		selectByExampleQueryId="false" 
-		domainObjectName="UserMessage" /> -->
-	<!-- <table tableName="index_message"
+		domainObjectName="UserMessage" />
+	<!-- <table tableName="show_message"
 		enableCountByExample="true" enableUpdateByExample="true"
 		enableDeleteByExample="true" enableSelectByExample="true"
 		selectByExampleQueryId="false" 
-		domainObjectName="IndexMessage" />
-	<table tableName="show_message"
+		domainObjectName="ShowMessage" />
+	<table tableName="companttype"
 		enableCountByExample="true" enableUpdateByExample="true"
 		enableDeleteByExample="true" enableSelectByExample="true"
 		selectByExampleQueryId="false" 
-		domainObjectName="ShowMessage" /> -->
+		domainObjectName="Companttype" />
+	<table tableName="main_info"
+		enableCountByExample="true" enableUpdateByExample="true"
+		enableDeleteByExample="true" enableSelectByExample="true"
+		selectByExampleQueryId="false" 
+		domainObjectName="MainInfo" />
+	<table tableName="schoolinfo"
+		enableCountByExample="true" enableUpdateByExample="true"
+		enableDeleteByExample="true" enableSelectByExample="true"
+		selectByExampleQueryId="false" 
+		domainObjectName="SchoolInfo" /> -->
   </context>
 </generatorConfiguration>

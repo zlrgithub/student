@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.student.dao.mapper.interfaces.UserMessageMapper">
   <resultMap id="BaseResultMap" type="com.student.dao.mapper.bo.UserMessage">
-    <id column="student_id" jdbcType="INTEGER" property="studentId" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <id column="student_id" jdbcType="VARCHAR" property="studentId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="sex" jdbcType="VARCHAR" property="sex" />
     <result column="school" jdbcType="VARCHAR" property="school" />
@@ -97,15 +97,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from user_message
-    where student_id = #{studentId,jdbcType=INTEGER}
+    where student_id = #{studentId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from user_message
-    where student_id = #{studentId,jdbcType=INTEGER}
+    where student_id = #{studentId,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.student.dao.mapper.bo.UserMessageExample">
     delete from user_message
@@ -120,7 +120,7 @@
       workspace, city_type, company_type, 
       work, is_major, salary, 
       is_train, way_of_offer)
-    values (#{studentId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+    values (#{studentId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
       #{sex,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{graTime,jdbcType=INTEGER}, 
       #{isTopSchool,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{prefStandards,jdbcType=VARCHAR}, 
       #{workspace,jdbcType=VARCHAR}, #{cityType,jdbcType=VARCHAR}, #{companyType,jdbcType=INTEGER}, 
@@ -184,10 +184,10 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="studentId != null">
-        #{studentId,jdbcType=INTEGER},
+        #{studentId,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
+        #{userId,jdbcType=VARCHAR},
       </if>
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
@@ -246,10 +246,10 @@
     update user_message
     <set>
       <if test="record.studentId != null">
-        student_id = #{record.studentId,jdbcType=INTEGER},
+        student_id = #{record.studentId,jdbcType=VARCHAR},
       </if>
       <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=VARCHAR},
       </if>
       <if test="record.username != null">
         username = #{record.username,jdbcType=VARCHAR},
@@ -303,8 +303,8 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update user_message
-    set student_id = #{record.studentId,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER},
+    set student_id = #{record.studentId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
       username = #{record.username,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=VARCHAR},
       school = #{record.school,jdbcType=VARCHAR},
@@ -328,7 +328,7 @@
     update user_message
     <set>
       <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
+        user_id = #{userId,jdbcType=VARCHAR},
       </if>
       <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
@@ -376,11 +376,11 @@
         way_of_offer = #{wayOfOffer,jdbcType=INTEGER},
       </if>
     </set>
-    where student_id = #{studentId,jdbcType=INTEGER}
+    where student_id = #{studentId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.student.dao.mapper.bo.UserMessage">
     update user_message
-    set user_id = #{userId,jdbcType=INTEGER},
+    set user_id = #{userId,jdbcType=VARCHAR},
       username = #{username,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
       school = #{school,jdbcType=VARCHAR},
@@ -396,403 +396,84 @@
       salary = #{salary,jdbcType=INTEGER},
       is_train = #{isTrain,jdbcType=VARCHAR},
       way_of_offer = #{wayOfOffer,jdbcType=INTEGER}
-    where student_id = #{studentId,jdbcType=INTEGER}
+    where student_id = #{studentId,jdbcType=VARCHAR}
   </update>
-  <resultMap id="BaseResultMap" type="com.student.dao.mapper.bo.UserMessage">
-    <id column="student_id" jdbcType="INTEGER" property="studentId" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="sex" jdbcType="VARCHAR" property="sex" />
-    <result column="school" jdbcType="VARCHAR" property="school" />
-    <result column="gra_time" jdbcType="INTEGER" property="graTime" />
-    <result column="is_top_school" jdbcType="VARCHAR" property="isTopSchool" />
-    <result column="major" jdbcType="VARCHAR" property="major" />
-    <result column="pref_standards" jdbcType="VARCHAR" property="prefStandards" />
-    <result column="workspace" jdbcType="VARCHAR" property="workspace" />
-    <result column="city_type" jdbcType="VARCHAR" property="cityType" />
-    <result column="company_type" jdbcType="INTEGER" property="companyType" />
-    <result column="work" jdbcType="VARCHAR" property="work" />
-    <result column="is_major" jdbcType="INTEGER" property="isMajor" />
-    <result column="salary" jdbcType="INTEGER" property="salary" />
-    <result column="is_train" jdbcType="VARCHAR" property="isTrain" />
-    <result column="way_of_offer" jdbcType="INTEGER" property="wayOfOffer" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    student_id, user_id, username, sex, school, gra_time, is_top_school, major, pref_standards, 
-    workspace, city_type, company_type, work, is_major, salary, is_train, way_of_offer
-  </sql>
-  <select id="selectByExample" parameterType="com.student.dao.mapper.bo.UserMessageExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    'false' as QUERYID,
-    <include refid="Base_Column_List" />
-    from user_message
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
+  
+  <select id="selectCityInfo" parameterType="map" resultType="com.student.until.CityInfo">
+    SELECT
+     	gra_time as year,
+    	COUNT(1) as number
+    FROM user_message
+    WHERE workspace = #{cityName,jdbcType=VARCHAR} 
+    	AND gra_time BETWEEN (#{year,jdbcType=VARCHAR}-5) AND #{year,jdbcType=VARCHAR}
+    	${noJobInfo}
+    GROUP BY gra_time ORDER BY gra_time DESC
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  
+   <select id="selectEmployRate" parameterType="map" resultType="com.student.until.CityInfo">
+    SELECT 
+  		detail.gra_time AS YEAR,
+  		detail.sex AS factor,
+  		CASE
+   		WHEN total.num = 0 THEN 0 
+    		ELSE detail.num / total.num 
+  		END AS number 
+	FROM
+	  (SELECT 
+		gra_time,
+	    sex,
+	    COUNT(1) AS num 
+	  FROM user_message 
+	  WHERE workspace = #{cityName,jdbcType=VARCHAR} 
+	    AND gra_time BETWEEN (#{year,jdbcType=VARCHAR}-5) AND #{year,jdbcType=VARCHAR}
+	    AND WORK NOT IN ('继续深造', '未确定') 
+	  GROUP BY gra_time,sex
+	   UNION ALL
+	  SELECT 
+	    gra_time,
+	    '' AS sex,
+	    COUNT(1) AS num 
+	  FROM user_message 
+	  WHERE workspace = #{cityName,jdbcType=VARCHAR} 
+	    AND gra_time BETWEEN (#{year,jdbcType=VARCHAR}-5) AND #{year,jdbcType=VARCHAR}
+	    AND WORK NOT IN ('继续深造', '未确定') 
+	  GROUP BY gra_time
+	   ) detail 
+	  LEFT JOIN 
+	    (SELECT 
+	      gra_time AS gra_time,
+	      COUNT(1) AS num 
+	    FROM user_message 
+	    WHERE workspace = #{cityName,jdbcType=VARCHAR} 
+	    GROUP BY gra_time) total 
+	    ON detail.gra_time = total.gra_time
+	ORDER BY detail.gra_time,detail.sex
+  </select>
+  <select id="selectTrainAndJob" parameterType="map" resultType="com.student.until.CityInfo">
+    SELECT
+     	${factors}  as factor,
+    	COUNT(1) as number
+    FROM user_message
+    WHERE workspace = #{cityName,jdbcType=VARCHAR}
+    	AND gra_time BETWEEN (#{year,jdbcType=VARCHAR}-5) AND #{year,jdbcType=VARCHAR}
+    	${noJobInfo}
+    GROUP BY ${factors}
+  </select>
+   <select id="selectTopTenJob" parameterType="map" resultType="com.student.until.CityInfo">
     select 
-    <include refid="Base_Column_List" />
-    from user_message
-    where student_id = #{studentId,jdbcType=INTEGER}
+    	t.factor,
+    	t.number
+    from 
+	    (SELECT
+	     	work as factor,
+	    	COUNT(1) as number
+	    FROM user_message
+	    WHERE workspace = #{cityName,jdbcType=VARCHAR}
+	    	AND gra_time = #{year,jdbcType=VARCHAR}
+	    	${noJobInfo}
+	    GROUP BY work 
+	   	) t
+	order by t.number desc LIMIT 10 
+	  	
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user_message
-    where student_id = #{studentId,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.student.dao.mapper.bo.UserMessageExample">
-    delete from user_message
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.student.dao.mapper.bo.UserMessage">
-    insert into user_message (student_id, user_id, username, 
-      sex, school, gra_time, 
-      is_top_school, major, pref_standards, 
-      workspace, city_type, company_type, 
-      work, is_major, salary, 
-      is_train, way_of_offer)
-    values (#{studentId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{graTime,jdbcType=INTEGER}, 
-      #{isTopSchool,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{prefStandards,jdbcType=VARCHAR}, 
-      #{workspace,jdbcType=VARCHAR}, #{cityType,jdbcType=VARCHAR}, #{companyType,jdbcType=INTEGER}, 
-      #{work,jdbcType=VARCHAR}, #{isMajor,jdbcType=INTEGER}, #{salary,jdbcType=INTEGER}, 
-      #{isTrain,jdbcType=VARCHAR}, #{wayOfOffer,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.student.dao.mapper.bo.UserMessage">
-    insert into user_message
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="studentId != null">
-        student_id,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="username != null">
-        username,
-      </if>
-      <if test="sex != null">
-        sex,
-      </if>
-      <if test="school != null">
-        school,
-      </if>
-      <if test="graTime != null">
-        gra_time,
-      </if>
-      <if test="isTopSchool != null">
-        is_top_school,
-      </if>
-      <if test="major != null">
-        major,
-      </if>
-      <if test="prefStandards != null">
-        pref_standards,
-      </if>
-      <if test="workspace != null">
-        workspace,
-      </if>
-      <if test="cityType != null">
-        city_type,
-      </if>
-      <if test="companyType != null">
-        company_type,
-      </if>
-      <if test="work != null">
-        work,
-      </if>
-      <if test="isMajor != null">
-        is_major,
-      </if>
-      <if test="salary != null">
-        salary,
-      </if>
-      <if test="isTrain != null">
-        is_train,
-      </if>
-      <if test="wayOfOffer != null">
-        way_of_offer,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="studentId != null">
-        #{studentId,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null">
-        #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="school != null">
-        #{school,jdbcType=VARCHAR},
-      </if>
-      <if test="graTime != null">
-        #{graTime,jdbcType=INTEGER},
-      </if>
-      <if test="isTopSchool != null">
-        #{isTopSchool,jdbcType=VARCHAR},
-      </if>
-      <if test="major != null">
-        #{major,jdbcType=VARCHAR},
-      </if>
-      <if test="prefStandards != null">
-        #{prefStandards,jdbcType=VARCHAR},
-      </if>
-      <if test="workspace != null">
-        #{workspace,jdbcType=VARCHAR},
-      </if>
-      <if test="cityType != null">
-        #{cityType,jdbcType=VARCHAR},
-      </if>
-      <if test="companyType != null">
-        #{companyType,jdbcType=INTEGER},
-      </if>
-      <if test="work != null">
-        #{work,jdbcType=VARCHAR},
-      </if>
-      <if test="isMajor != null">
-        #{isMajor,jdbcType=INTEGER},
-      </if>
-      <if test="salary != null">
-        #{salary,jdbcType=INTEGER},
-      </if>
-      <if test="isTrain != null">
-        #{isTrain,jdbcType=VARCHAR},
-      </if>
-      <if test="wayOfOffer != null">
-        #{wayOfOffer,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.student.dao.mapper.bo.UserMessageExample" resultType="java.lang.Long">
-    select count(*) from user_message
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update user_message
-    <set>
-      <if test="record.studentId != null">
-        student_id = #{record.studentId,jdbcType=INTEGER},
-      </if>
-      <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=INTEGER},
-      </if>
-      <if test="record.username != null">
-        username = #{record.username,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sex != null">
-        sex = #{record.sex,jdbcType=VARCHAR},
-      </if>
-      <if test="record.school != null">
-        school = #{record.school,jdbcType=VARCHAR},
-      </if>
-      <if test="record.graTime != null">
-        gra_time = #{record.graTime,jdbcType=INTEGER},
-      </if>
-      <if test="record.isTopSchool != null">
-        is_top_school = #{record.isTopSchool,jdbcType=VARCHAR},
-      </if>
-      <if test="record.major != null">
-        major = #{record.major,jdbcType=VARCHAR},
-      </if>
-      <if test="record.prefStandards != null">
-        pref_standards = #{record.prefStandards,jdbcType=VARCHAR},
-      </if>
-      <if test="record.workspace != null">
-        workspace = #{record.workspace,jdbcType=VARCHAR},
-      </if>
-      <if test="record.cityType != null">
-        city_type = #{record.cityType,jdbcType=VARCHAR},
-      </if>
-      <if test="record.companyType != null">
-        company_type = #{record.companyType,jdbcType=INTEGER},
-      </if>
-      <if test="record.work != null">
-        work = #{record.work,jdbcType=VARCHAR},
-      </if>
-      <if test="record.isMajor != null">
-        is_major = #{record.isMajor,jdbcType=INTEGER},
-      </if>
-      <if test="record.salary != null">
-        salary = #{record.salary,jdbcType=INTEGER},
-      </if>
-      <if test="record.isTrain != null">
-        is_train = #{record.isTrain,jdbcType=VARCHAR},
-      </if>
-      <if test="record.wayOfOffer != null">
-        way_of_offer = #{record.wayOfOffer,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update user_message
-    set student_id = #{record.studentId,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=VARCHAR},
-      school = #{record.school,jdbcType=VARCHAR},
-      gra_time = #{record.graTime,jdbcType=INTEGER},
-      is_top_school = #{record.isTopSchool,jdbcType=VARCHAR},
-      major = #{record.major,jdbcType=VARCHAR},
-      pref_standards = #{record.prefStandards,jdbcType=VARCHAR},
-      workspace = #{record.workspace,jdbcType=VARCHAR},
-      city_type = #{record.cityType,jdbcType=VARCHAR},
-      company_type = #{record.companyType,jdbcType=INTEGER},
-      work = #{record.work,jdbcType=VARCHAR},
-      is_major = #{record.isMajor,jdbcType=INTEGER},
-      salary = #{record.salary,jdbcType=INTEGER},
-      is_train = #{record.isTrain,jdbcType=VARCHAR},
-      way_of_offer = #{record.wayOfOffer,jdbcType=INTEGER}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.student.dao.mapper.bo.UserMessage">
-    update user_message
-    <set>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="username != null">
-        username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null">
-        sex = #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="school != null">
-        school = #{school,jdbcType=VARCHAR},
-      </if>
-      <if test="graTime != null">
-        gra_time = #{graTime,jdbcType=INTEGER},
-      </if>
-      <if test="isTopSchool != null">
-        is_top_school = #{isTopSchool,jdbcType=VARCHAR},
-      </if>
-      <if test="major != null">
-        major = #{major,jdbcType=VARCHAR},
-      </if>
-      <if test="prefStandards != null">
-        pref_standards = #{prefStandards,jdbcType=VARCHAR},
-      </if>
-      <if test="workspace != null">
-        workspace = #{workspace,jdbcType=VARCHAR},
-      </if>
-      <if test="cityType != null">
-        city_type = #{cityType,jdbcType=VARCHAR},
-      </if>
-      <if test="companyType != null">
-        company_type = #{companyType,jdbcType=INTEGER},
-      </if>
-      <if test="work != null">
-        work = #{work,jdbcType=VARCHAR},
-      </if>
-      <if test="isMajor != null">
-        is_major = #{isMajor,jdbcType=INTEGER},
-      </if>
-      <if test="salary != null">
-        salary = #{salary,jdbcType=INTEGER},
-      </if>
-      <if test="isTrain != null">
-        is_train = #{isTrain,jdbcType=VARCHAR},
-      </if>
-      <if test="wayOfOffer != null">
-        way_of_offer = #{wayOfOffer,jdbcType=INTEGER},
-      </if>
-    </set>
-    where student_id = #{studentId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.student.dao.mapper.bo.UserMessage">
-    update user_message
-    set user_id = #{userId,jdbcType=INTEGER},
-      username = #{username,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=VARCHAR},
-      school = #{school,jdbcType=VARCHAR},
-      gra_time = #{graTime,jdbcType=INTEGER},
-      is_top_school = #{isTopSchool,jdbcType=VARCHAR},
-      major = #{major,jdbcType=VARCHAR},
-      pref_standards = #{prefStandards,jdbcType=VARCHAR},
-      workspace = #{workspace,jdbcType=VARCHAR},
-      city_type = #{cityType,jdbcType=VARCHAR},
-      company_type = #{companyType,jdbcType=INTEGER},
-      work = #{work,jdbcType=VARCHAR},
-      is_major = #{isMajor,jdbcType=INTEGER},
-      salary = #{salary,jdbcType=INTEGER},
-      is_train = #{isTrain,jdbcType=VARCHAR},
-      way_of_offer = #{wayOfOffer,jdbcType=INTEGER}
-    where student_id = #{studentId,jdbcType=INTEGER}
-  </update>
 </mapper>

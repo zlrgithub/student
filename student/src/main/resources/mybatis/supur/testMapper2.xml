@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<include refid = "com.student.dao.mapper.interfaces.testMapper.selectByExample" />

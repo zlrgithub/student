@@ -1,9 +1,9 @@
 package com.student.dao.mapper.bo;
 
 public class UserMessage {
-    private Integer studentId;
+    private String studentId;
 
-    private Integer userId;
+    private String userId;
 
     private String username;
 
@@ -35,19 +35,19 @@ public class UserMessage {
 
     private Integer wayOfOffer;
 
-    public Integer getStudentId() {
+    public String getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(Integer studentId) {
+    public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

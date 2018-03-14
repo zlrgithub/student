@@ -99,17 +99,16 @@ function showmap(){
  		myChart.on('click', function (params) {
  			console.log(params);
  			$().ready(function(){
- 				$.post("cityInfo",
+ 				$.post("cityInfoDao.do",
  						{
  							cityName:params.name
  						},
  						function(data,status){
- 							window.location.href="http://localhost:8080/student/showMessage/cityInfo"
+ 							//window.location.href="http://localhost:8080/student/showMessage/cityInfo"
  							//parent.window.document.getElementById("showView").src="http://localhost:8080/student/showMessage/cityInfo"
  				});
  			});
- 			
- 				
+ 			window.location.href="http://localhost:8080/student/showMessage/cityInfo"
  		});	
  		
 }

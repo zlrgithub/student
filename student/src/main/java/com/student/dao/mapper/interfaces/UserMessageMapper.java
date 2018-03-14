@@ -2,7 +2,12 @@ package com.student.dao.mapper.interfaces;
 
 import com.student.dao.mapper.bo.UserMessage;
 import com.student.dao.mapper.bo.UserMessageExample;
+import com.student.until.CityInfo;
+import com.student.until.WorkInfoMap;
+
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMessageMapper {
@@ -10,7 +15,7 @@ public interface UserMessageMapper {
 
     int deleteByExample(UserMessageExample example);
 
-    int deleteByPrimaryKey(Integer studentId);
+    int deleteByPrimaryKey(String studentId);
 
     int insert(UserMessage record);
 
@@ -18,7 +23,7 @@ public interface UserMessageMapper {
 
     List<UserMessage> selectByExample(UserMessageExample example);
 
-    UserMessage selectByPrimaryKey(Integer studentId);
+    UserMessage selectByPrimaryKey(String studentId);
 
     int updateByExampleSelective(@Param("record") UserMessage record, @Param("example") UserMessageExample example);
 
@@ -27,4 +32,12 @@ public interface UserMessageMapper {
     int updateByPrimaryKeySelective(UserMessage record);
 
     int updateByPrimaryKey(UserMessage record);
+
+	List<CityInfo> selectCityInfo(Map<String, String> param);
+
+	List<CityInfo> selectEmployRate(Map<String, String> param);
+
+	List<CityInfo> selectTrainAndJob(Map<String, String> param);
+
+	List<CityInfo> selectTopTenJob(Map<String, String> param);
 }

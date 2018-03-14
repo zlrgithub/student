@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.student.dao.mapper.interfaces.UserMapper">
   <resultMap id="BaseResultMap" type="com.student.dao.mapper.bo.User">
-    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="is_off" jdbcType="INTEGER" property="isOff" />
@@ -85,22 +85,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="userExample" parameterType="map" resultMap="BaseResultMap">
-    select *  from user
-   	where user_id is not null ${userName} ${password} 
-  </select>
-  <select id="selectMaxUserId" resultMap="BaseResultMap">
-  	select max(user_id) as userId from user
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from user
-    where user_id = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from user
-    where user_id = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.student.dao.mapper.bo.UserExample">
     delete from user
@@ -112,7 +105,7 @@
     insert into user (user_id, user_name, password, 
       is_off, create_date, del_date
       )
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{isOff,jdbcType=INTEGER}, #{createDate,jdbcType=CHAR}, #{delDate,jdbcType=CHAR}
       )
   </insert>
@@ -140,7 +133,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
+        #{userId,jdbcType=VARCHAR},
       </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
@@ -169,7 +162,7 @@
     update user
     <set>
       <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=VARCHAR},
       </if>
       <if test="record.userName != null">
         user_name = #{record.userName,jdbcType=VARCHAR},
@@ -193,7 +186,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update user
-    set user_id = #{record.userId,jdbcType=INTEGER},
+    set user_id = #{record.userId,jdbcType=VARCHAR},
       user_name = #{record.userName,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       is_off = #{record.isOff,jdbcType=INTEGER},
@@ -222,7 +215,7 @@
         del_date = #{delDate,jdbcType=CHAR},
       </if>
     </set>
-    where user_id = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.student.dao.mapper.bo.User">
     update user
@@ -231,6 +224,11 @@
       is_off = #{isOff,jdbcType=INTEGER},
       create_date = #{createDate,jdbcType=CHAR},
       del_date = #{delDate,jdbcType=CHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </update>
+  <select id = "login" parameterType = "map" resultMap="BaseResultMap" >
+  	select * from user where user_id is not null 
+  		and user_name = #{userName,jdbcType=VARCHAR}
+  		and password = #{password,jdbcType=VARCHAR}
+  </select>
 </mapper>
