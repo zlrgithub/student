@@ -38,8 +38,8 @@ function topTenJob(cityData){
 	                        var colorList = ['#C33531','#EFE42A','#64BD3D','#EE9201','#29AAE3', '#B74AE5','#0AAF9F','#E89589','#16A085','#4A235A']; 
 	                        return colorList[params.dataIndex] 
 	                    }
-		        }
-		    },
+		        	}
+		        },
 		        type: 'bar'
 		    }]
 		};
@@ -494,11 +494,9 @@ function trainAndJob(cityData){
 		        text: '实习时长与就业',
 		        x:'center'
 		    },
-		    /*tooltip : {
-		        trigger: 'item',
-		        formatter: "{a} <br/>{b} : {c} ({d}%)",
-		        padding:[0,0,0,0]
-		    },*/
+		    tooltip : {
+		        trigger: 'item'
+		    },
 		    legend: {
 		        orient: 'vertical',
 		        x: 0,

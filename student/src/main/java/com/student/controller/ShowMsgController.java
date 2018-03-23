@@ -26,8 +26,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.asm.Type;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mysql.fabric.xmlrpc.base.Array;
+import com.student.dao.mapper.bo.UserMessageExample.Criteria;
 import com.student.dao.mapper.bo.UserMessage;
 import com.student.dao.mapper.bo.UserMessageExample;
 import com.student.service.interfaces.IUserMessage;
@@ -253,5 +258,132 @@ public class ShowMsgController {
 		string = JSON.toJSONString(mapInfoList);
 		logger.info(string);
     	return  JSONObject.parse(string);
-    } 
+    }
+    
+    class A{
+    	public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public String getValue() {
+			return value;
+		}
+		public void setValue(String value) {
+			this.value = value;
+		}
+		private String name;
+    	private String value;
+    }
+    @RequestMapping(value = "/selectByMe.do",method=RequestMethod.POST)
+    public @ResponseBody Object getSelectByMe(HttpServletRequest request,HttpServletResponse response) {  
+    	String selectInfos = request.getParameter("selectInfos");
+    	Gson gson = new Gson();
+    	Map<String,String> example = new HashMap<>();
+    	Map<String,String> example2 = new HashMap<>();
+    	List<A> list = new ArrayList<>();
+    	list = gson.fromJson(selectInfos, new TypeToken<List<A>>(){}.getType());
+    	for( int i = 0 ;i < list.size() ; i++ ){
+	    	if( "gradTime".equals(list.get(i).name)){
+	    		example.put("gradTime", "and gra_time = '"+list.get(i).getValue()+"'");
+	   		}else if ( "school".equals(list.get(i).name)){
+	   			example.put("school", "and school = '"+list.get(i).getValue()+"'");
+    		}else if ( "major".equals(list.get(i).name)){
+	    		example.put("major", "and major = '"+list.get(i).getValue()+"'");
+	   		}else if ( "trainTime".equals(list.get(i).name)){
+	   			example.put("trainTime", "and is_train = '"+list.get(i).getValue()+"'");
+    		}else if ( "prefStandards".equals(list.get(i).name)){
+	    		example.put("prefStandards", "and pref_standards = '"+list.get(i).getValue()+"'");
+	    	}else if ( "companyType".equals(list.get(i).name)){
+	   			String[] compType = {"国有企业","外资企业","私有企业","事业单位","股份制公司","合资企业","上市公司"};
+	   			int count = -1;
+	   			for (String s : compType ){
+	   				if( s.equals(list.get(i).value )){
+    					count++;
+	    				break;
+	    			}
+	    		}
+	    		example.put("companyType", "and company_type = '"+count+"'");
+	    	}else if ( "sex".equals(list.get(i).name)){
+	    		example.put("sex", "and sex = '"+list.get(i).getValue()+"'");
+	    	}else if ( "salary1".equals(list.get(i).name)){
+	    		example.put("salary1", "and salary >= '"+list.get(i).getValue()+"'");
+	    	}else if ( "salary2".equals(list.get(i).name)){
+	    		example.put("salary2", "and salary <= '"+list.get(i).getValue()+"'");
+	    	}
+	    	if( i != (list.size()-1) ){
+	    		if( "gradTime".equals(list.get(i).name)){
+		   			example2.put("gradTime", "and gra_time = '"+list.get(i).getValue()+"'");
+		   		}else if ( "school".equals(list.get(i).name)){
+		   			example2.put("school", "and school = '"+list.get(i).getValue()+"'");
+	    		}else if ( "major".equals(list.get(i).name)){
+		   			example2.put("major", "and major = '"+list.get(i).getValue()+"'");
+		   		}else if ( "trainTime".equals(list.get(i).name)){
+		   			example2.put("trainTime", "and is_train = '"+list.get(i).getValue()+"'");
+	    		}else if ( "prefStandards".equals(list.get(i).name)){
+		    		example2.put("prefStandards", "and pref_standards = '"+list.get(i).getValue()+"'");
+		    	}else if ( "companyType".equals(list.get(i).name)){
+		   			String[] compType = {"国有企业","外资企业","私有企业","事业单位","股份制公司","合资企业","上市公司"};
+		   			int count = -1;
+		   			for (String s : compType ){
+		   				if( s.equals(list.get(i).value )){
+	    					count++;
+		    				break;
+		    			}
+		    		}
+		    		example2.put("companyType", "and company_type = '"+count+"'");
+		    	}else if ( "sex".equals(list.get(i).name)){
+		    		example2.put("sex", "and sex = '"+list.get(i).getValue()+"'");
+		    	}else if ( "salary1".equals(list.get(i).name)){
+		    		example2.put("salary1", "and salary >= '"+list.get(i).getValue()+"'");
+		    	}else if ( "salary2".equals(list.get(i).name)){
+		    		example2.put("salary2", "and salary <= '"+list.get(i).getValue()+"'");
+		    	}
+	    	}else{
+		    	if( "gradTime".equals(list.get(i).name)){
+		    		example2.put("gradTime", "and gra_time != '"+list.get(i).getValue()+"'");
+		    	}else if ( "school".equals(list.get(i).name)){
+		    		example2.put("school", "and school != '"+list.get(i).getValue()+"'");
+		    	}else if ( "major".equals(list.get(i).name)){
+		    		example2.put("major", "and major != '"+list.get(i).getValue()+"'");
+		    	}else if ( "trainTime".equals(list.get(i).name)){
+		    		example2.put("trainTime", "and is_train != '"+list.get(i).getValue()+"'");
+		    	}else if ( "prefStandards".equals(list.get(i).name)){
+		    		example2.put("prefStandards", "and pref_standards != '"+list.get(i).getValue()+"'");
+		    	}else if ( "companyType".equals(list.get(i).name)){
+		    		String[] compType = {"国有企业","外资企业","私有企业","事业单位","股份制公司","合资企业","上市公司"};
+		    		int count = -1;
+		    		for (String s : compType ){
+		    			if( s.equals(list.get(i).value )){
+		    				count++;
+		    				break;
+		    			}
+		    		}
+		    		example2.put("companyType", "and company_type != '"+count+"'");
+		    	}else if ( "sex".equals(list.get(i).name)){
+		    		example2.put("sex", "and sex != '"+list.get(i).getValue()+"'");
+		    	}else if ( "salary1".equals(list.get(i).name)){
+		    		example2.put("salary1", "and salary < '"+list.get(i).getValue()+"'");
+		    	}else if ( "salary2".equals(list.get(i).name)){
+		    		example2.put("salary2", "and salary > '"+list.get(i).getValue()+"'");
+		    	}
+	    	}
+	   }
+    	Long number = iUserMessage.countBySelectByMe(example);
+    	A a = new A();
+    	a.setName(list.get(list.size()-1).name);
+    	a.setValue(number.toString());
+    	System.out.println(JSON.toJSONString(example2));
+    	Long number2 = iUserMessage.countBySelectByMe(example2);
+    	A b = new A();
+    	b.setName(list.get(list.size()-1).name);
+    	b.setValue(number2.toString());
+    	Map<String, A> num = new HashMap<>();
+    	
+    	num.put("perCount", a);
+    	num.put("perCount2", b);
+    	System.out.println(JSON.toJSONString(num));
+    	return JSONObject.parse(JSON.toJSONString(num));
+    }
 }

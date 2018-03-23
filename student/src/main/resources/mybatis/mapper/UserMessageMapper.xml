@@ -476,4 +476,20 @@
 	order by t.number desc LIMIT 10 
 	  	
   </select>
+  
+  <select id = "countBySelectByMe" parameterType="map" resultType="java.lang.Long">
+  	select count(*) from user_message
+  	where student_id is not null
+  	${gradTime}
+  	${school}
+  	${major}
+  	${trainTime}
+  	${prefStandards}
+  	${companyType}
+  	${sex}
+  	${salary1}
+  	${salary2}
+  	
+  </select>
+  
 </mapper>

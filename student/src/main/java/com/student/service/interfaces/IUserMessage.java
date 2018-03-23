@@ -18,4 +18,5 @@ public interface IUserMessage {
 	List<CityInfo> selectEmployRate(Map<String, String> param);
 	List<CityInfo> selectTrainAndJob(Map<String, String> param);
 	List<CityInfo> selectTopTenJob(Map<String, String> param);
+	Long countBySelectByMe(Map<String, String> example);
 }

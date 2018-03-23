@@ -1,0 +1,13 @@
+input {
+	width: 95px;
+}
+select {
+	width: 100px;
+	font-size: 1px;
+	font-style: normal;
+	color: gray;
+}
+label {
+	width: 300px;
+	color: black;
+}

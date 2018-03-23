@@ -58,5 +58,9 @@ public class UserMessageImpl implements IUserMessage{
 	public List<CityInfo> selectTopTenJob(Map<String, String> param) {
 		return userMessageMapper.selectTopTenJob(param);
 	}
+	@Override
+	public Long countBySelectByMe(Map<String, String> example) {
+		return userMessageMapper.countBySelectByMe(example);
+	}
 	
 }
