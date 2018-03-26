@@ -1,11 +1,33 @@
+$(document).ready(function(){
+	$().ready(function(){
+		$.post("selectByMeIndex.do","",function(data,status){
+			var jsonObj = JSON.parse(data);
+			for(var i = 0 ; i < jsonObj.schoolNames.length; i++){
+				var opt = $('<option>'+jsonObj.schoolNames[i]+'</option>')
+				$("#school").append(opt);
+			}
+			for(var i = 0 ; i < jsonObj.majorNames.length; i++){
+				var opt = $('<option>'+jsonObj.majorNames[i]+'</option>')
+				$("#major").append(opt);
+			}
+		});
+	});
+});
+
 var selectInfoList = new Array();
 var showDate = new Array();
 var flage = null;
+var count = 0;
 function resets(){
 	selectInfoList.splice(0,selectInfoList.length);
+	$("input").removeAttr("disabled");
+	$("select").removeAttr("disabled");
 	showDate.splice(0,showDate.length);
 	flage=null;
+	showDate.push({name:'ResultTree',children: []});
 	showMessage();
+    count = 0;
+    $("#dg").empty();
 }
 function selectList(data){
 	if( selectInfoList.length !=0 ){
@@ -26,7 +48,7 @@ function selectList(data){
 		selectInfoList.push({name:data.id,value:$(data).val()})
 		data.disabled = true;
 	}
-	getInfo();
+	getInfo($(data).val());
 }
 
 function showMessage(){
@@ -67,7 +89,7 @@ function showMessage(){
 	                        lineStyle: {
 	                            color: '#000',
 	                            width: 1,
-	                            type: 'broken' // 'curve'|'broken'|'solid'|'dotted'|'dashed'
+	                            type: 'curve' // 'curve'|'broken'|'solid'|'dotted'|'dashed'
 	                        }
 	                    }
 	                },
@@ -82,50 +104,66 @@ function showMessage(){
 	myChart.setOption(option);//加载option
 }
 
-function getInfo(){
+function getInfo(selectName){
 	$(document).ready(function(){
 		$.ajaxSettings.async = false;
 		var selectInfoLists = JSON.stringify(selectInfoList);
-		var name ;
+		//var name ;
 		var value ;
+		var value2 ;
 		$.post("selectByMe.do",{selectInfos:selectInfoLists},function(data,status){
 			var jsonObj = JSON.parse( data );
-			name = jsonObj.perCount.name;
+			//name = jsonObj.perCount.name;
 			value = jsonObj.perCount.value;
 			value2 = jsonObj.perCount2.value;
-			showDate.push({name:'root',children: []});
+			if(count == 0){
+				var tr1 = $("<tr id = 'name'><th width='120px;'hight='60px;'>查询条件：</th></tr>");
+				var tr2 = $("<tr id = 'info'><th width='120px;'hight='60px;'>符合条件人数：</th></tr>");
+				var tr3 = $("<tr id = 'other'><th width='120px;'hight='60px;'>不符合条件人数：</th></tr>");
+				var tr4 = $("<tr id = 'prop'><th width='120px;'hight='60px;'>该条件下占比：</th></tr>");
+				var tr5 = $("<tr id = 'propAll'><th width='120px;'hight='60px;'>总人数占比：</th></tr>")
+				$("#dg").append(tr1);
+				$("#dg").append(tr2);
+				$("#dg").append(tr3);
+				$("#dg").append(tr4);
+				$("#dg").append(tr5);
+				count = Number(value)+Number(value2);
+			}
 			var x = 1;
+			showDate.push({name:'ResultTree',children: []});
 			flage = showDate[0];
 			while(x==1){
 				if(flage.children[0] == null){
-					flage.children[0]={name:jsonObj.perCount.name,value:jsonObj.perCount.value,children:[]};
-					flage.children[1]={name:jsonObj.perCount2.name,value:jsonObj.perCount2.value,children:[]};
+					flage.children[0]={name:selectName,value:jsonObj.perCount.value,children:[]};
+					flage.children[1]={name:'非'+selectName,value:jsonObj.perCount2.value,children:[]};
 					x++;
 				}else{
 					flage = flage.children[0];
 				}
 			}
 		});
-		showInTable(name,value,value2);
+		showInTable(selectName,value,value2,count);
 		$.ajaxSettings.async = true;
 	});
 	showMessage();
 }
-function showInTable(name,value,value2){
+function showInTable(name,value,value2,count){
+	
 	$("#dg").css("display","");
-	var tr1 = $("#name");
-	var tr2 = $("#info");
-	var tr3 = $("#other");
-	var tr4 = $("#prop");
 	var prop = value/(Number(value)+Number(value2))
 	prop=prop+' ';
-	var s = prop.substring(0, 4)
+	var s = prop.substring(0, 4);
+	var propAll = value/count;
+	propAll=propAll+' ';
+	var ss = propAll.substring(0, 4);
 	var th1 = $("<th width='120px;'hight='50px;'>"+name+"</th>");
 	var th2 = $("<th width='120px;'hight='50px;'>"+value+"</th>");
 	var th3 = $("<th width='120px;'hight='50px;'>"+value2+"</th>");
 	var th4 = $("<th width='120px;'hight='50px;'>"+Number(s)*100+"%</th>");
-	tr1.append(th1);
-	tr2.append(th2);
-	tr3.append(th3);
-	tr4.append(th4);
+	var th5 = $("<th width='120px;'hight='50px;'>"+Number(ss)*100+"%</th>");
+	$("#name").append(th1);
+	$("#info").append(th2);
+	$("#other").append(th3);
+	$("#prop").append(th4);
+	$("#propAll").append(th5);
 }

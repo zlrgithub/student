@@ -25,10 +25,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.student.dao.mapper.bo.SchoolInfo;
 import com.student.dao.mapper.bo.User;
 import com.student.dao.mapper.bo.UserMessage;
 import com.student.dao.mapper.bo.UserMessageExample;
 import com.student.dao.mapper.interfaces.UserMessageMapper;
+import com.student.service.interfaces.ISchool;
 import com.student.service.interfaces.IUserMessage;
 import com.student.service.interfaces.UserInsert;
 import com.sun.net.httpserver.Authenticator.Success;
@@ -44,6 +46,9 @@ public class UserController {
 	
 	@Autowired
 	private IUserMessage iUserMessage;
+	
+	@Autowired
+	private ISchool iSchool;
 	
 	private User user;
 	private UserMessage userMessage;
@@ -122,6 +127,11 @@ public class UserController {
     	userMessage.setCompanyType(1);
     	userMessage.setIsMajor(Integer.valueOf(isMajor));
     	iUserMessage.insert(userMessage);
+    	
+    	SchoolInfo schoolInfo = new SchoolInfo();
+    	schoolInfo.setSchool(school);
+    	schoolInfo.setMajor(major);
+    	iSchool.inert(schoolInfo);
     	return "showMe";
     }
     
@@ -242,12 +252,16 @@ public class UserController {
 		 userMessage.setWork(request.getParameter("work"));
 	     userMessage.setIsMajor(Integer.valueOf(request.getParameter("isMajor")));
 	     userMessage.setSalary(Integer.valueOf(request.getParameter("salary")));
-	     System.out.println(request.getParameter("companyType"));
 	     userMessage.setCompanyType(Integer.valueOf(request.getParameter("companyType")));
 	     
 	     userMessage.setIsTrain(request.getParameter("isTrain"));
 	     userMessage.setWayOfOffer(Integer.valueOf(request.getParameter("wayOfOffer"))); 
 		iUserMessage.insert(userMessage);
+		
+		SchoolInfo schoolInfo = new SchoolInfo();
+    	schoolInfo.setSchool(request.getParameter("school"));
+    	schoolInfo.setMajor(request.getParameter("major"));
+    	iSchool.inert(schoolInfo);
         return "success";  
     } 
 }  

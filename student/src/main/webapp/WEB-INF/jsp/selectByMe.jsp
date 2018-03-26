@@ -30,7 +30,6 @@
 		<label for="school">学校名称：</label>
 		<select id = "school" onchange="selectList(this)">
 			<option>-请选择-</option>
-			<option>长春工业大学</option>
 		</select>
 		
 		<label for="major">专业：</label>
@@ -38,25 +37,51 @@
 			<option>-请选择-</option>
 		</select>
 		
-		<label for="trainTime">实习周期：</label>
+		<label for="trainTime">实习周期(月)：</label>
 		<select id = "trainTime" onchange="selectList(this)">
 			<option>-请选择-</option>
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+			<option>4</option>
+			<option>5</option>
+			<option>6</option>
+			<option>7</option>
+			<option>8</option>
+			<option>9</option>
+			<option>10</option>
+			<option>11</option>
+			<option>12</option>
 		</select>
 		
 		<label for = "prefStandards" >成绩：</label>
 		<select id = "prefStandards" onchange="selectList(this)">
 			<option>-请选择-</option>
+			<option>A(3.7~4.0)</option>
+			<option>B(3.3~3.7)</option>
+			<option>C(1.5~3.3)</option>
+			<option>D(1.5~1.0)</option>
+			<option>F(1.0~0.0)</option>
 		</select>
 		<br>
 		
 		<label for="companyType">公司类型：</label>
 		<select id = "companyType" onchange="selectList(this)">
 			<option>-请选择-</option>
+			<option>国有企业</option>
+			<option>外资企业</option>
+			<option>私有企业</option>
+			<option>事业单位</option>
+			<option>股份制公司</option>
+			<option>合资企业</option>
+			<option>上市公司</option>
 		</select>
 		
 		<label for = "sex">性别：</label>
 		<select id = "sex" onchange="selectList(this)">
 			<option>-请选择-</option>
+			<option>男</option>
+			<option>女</option>
 		</select>
 		
 		<label for ="salary">薪资范围：</label>
@@ -67,18 +92,6 @@
 </div>
 <div>
 	<table id ="dg" border="1px;" style="display:none; padding: 0px;margin: 0px;border-color: gray" cellpadding="0px;"cellspacing="0px;">
-		<tr id = "name">
-			<th width='120px;'hight='60px;'>查询条件：</th>
-		</tr>
-		<tr id = "info">
-			<th width='120px;'hight='60px;'>人数：</th>
-		</tr>
-		<tr id = "other">
-			<th width='120px;'hight='60px;'>其他：</th>
-		</tr>
-		<tr id = "prop">
-			<th width='120px;'hight='60px;'>占比：</th>
-		</tr>
 	</table>
 </div>
 </body>

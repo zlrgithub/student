@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import javax.json.Json;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -33,8 +36,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mysql.fabric.xmlrpc.base.Array;
 import com.student.dao.mapper.bo.UserMessageExample.Criteria;
+import com.student.dao.mapper.bo.SchoolInfo;
 import com.student.dao.mapper.bo.UserMessage;
 import com.student.dao.mapper.bo.UserMessageExample;
+import com.student.service.interfaces.ISchool;
 import com.student.service.interfaces.IUserMessage;
 import com.student.until.CityInfo;
 import com.student.until.WorkInfoMap;
@@ -47,6 +52,9 @@ public class ShowMsgController {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private IUserMessage iUserMessage;
+	
+	@Autowired
+	private ISchool iSchool;
 	
 	@RequestMapping("/showMain")
 	public String showMain(){
@@ -277,7 +285,7 @@ public class ShowMsgController {
     	private String value;
     }
     @RequestMapping(value = "/selectByMe.do",method=RequestMethod.POST)
-    public @ResponseBody Object getSelectByMe(HttpServletRequest request,HttpServletResponse response) {  
+    public @ResponseBody Object getSelectByMe(HttpServletRequest request,HttpServletResponse response) {
     	String selectInfos = request.getParameter("selectInfos");
     	Gson gson = new Gson();
     	Map<String,String> example = new HashMap<>();
@@ -385,5 +393,23 @@ public class ShowMsgController {
     	num.put("perCount2", b);
     	System.out.println(JSON.toJSONString(num));
     	return JSONObject.parse(JSON.toJSONString(num));
+    }
+    
+    @RequestMapping(value = "/selectByMeIndex.do",method=RequestMethod.POST)
+    public @ResponseBody Object getSelectByMeIndex(HttpServletRequest request,HttpServletResponse response) {
+    	List<SchoolInfo> schoolInfos = new ArrayList<>();
+    	schoolInfos = iSchool.selectSchoolInfo();
+    	Map<String,Set<String>> selectByMeIndex = new HashMap<>();
+    	Set<String> schoolNames = new HashSet<String>();
+     	Set<String> majorNames = new HashSet<String>();
+    	for (SchoolInfo schoolInfo : schoolInfos){
+    		schoolNames.add(schoolInfo.getSchool());
+    		majorNames.add(schoolInfo.getMajor());
+    	}
+    	selectByMeIndex.put("schoolNames", schoolNames);
+    	selectByMeIndex.put("majorNames", majorNames);
+    	
+    	logger.info(""+JSON.toJSONString(selectByMeIndex));
+    	return JSONObject.parse(JSON.toJSONString(selectByMeIndex));
     }
 }

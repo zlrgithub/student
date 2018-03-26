@@ -19,4 +19,6 @@ public interface SchoolInfoMapper {
     int updateByExampleSelective(@Param("record") SchoolInfo record, @Param("example") SchoolInfoExample example);
 
     int updateByExample(@Param("record") SchoolInfo record, @Param("example") SchoolInfoExample example);
+
+	List<SchoolInfo> selectSchoolInfo();
 }
