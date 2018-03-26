@@ -38,6 +38,15 @@
 				<td><input name="password2" type="text"></input></td>
 			</tr>
 			<tr>
+				<td class = "td">用户类型：</td>
+				<td>
+					<select name = 'roleType' id="roleType">
+						<option value = "学生">学生</option>
+						<option value = "企业人员">企业人员</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
 				<td colspan="2" style="padding-left: 100px">
 					<button id = "cancel" type="reset" onclick="turnback()">返回</button>
 					<button type="submit">注册</button>

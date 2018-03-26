@@ -15,12 +15,17 @@
 	<script type="text/javascript" src="./../js/jquery-easyui-1.5.4/datagrid-detailview.js"></script>
 	<script type="text/javascript" src="./../js/myJS/main.js"></script>
 </head>
-<body>
+<% 
+HttpSession httpSession = request.getSession();
+String roleType = httpSession.getAttribute("roleType").toString();
+%>
+<body  onload="showJobInfo(<%="'"+roleType+"'"%>)">
+
 	<div class="easyui-layout" style="width:100%;height:645px;">
 		<div id = "div1" region="north">
 			<h1>毕业生就业信息查询系统</h1>
 		</div>
-		<div id  ="div2" region="west" split="true" title="菜单" >
+		<div id  ="div2" region="west" split="true" title="菜单">
 			<!-- <p style="padding:5px;margin:0;"><font>Select Item:</font></p> -->
 			<ul>
 				<li><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/user/showMe')">
@@ -28,7 +33,9 @@
 				<li><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/showMessage/showMain')">
 					<font>数据分析</font></a></li><br>
 				<li><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/showMessage/selectByMe')">
-					<font>查询</font></a></li><br>
+					<font>自定义查询</font></a></li><br>
+				<li id = "jobInfo" style="display: none"><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/showMessage/selectByMe')">
+					<font>发布招聘信息</font></a></li><br>
 			</ul>
 		</div>
 		<div id="content" region="center" title=" ">

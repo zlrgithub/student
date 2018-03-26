@@ -19,6 +19,10 @@
         <form action="./user/login" method="post">
         	<input type="text" name="name" placeholder="Username"  onchange="pass()">
             <input id="password" type="text" name="password" placeholder="Password">
+            <select name = 'roleType' id="roleType">
+				<option value = "学生">学生</option>
+				<option value = "企业人员">企业人员</option>
+			</select>
             <button type="submit">Sign In</button>
             <button type="button" onclick="register()">Regist</button>
             <div class="error"><span>+</span></div>

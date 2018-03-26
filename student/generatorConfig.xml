@@ -44,7 +44,7 @@
     	targetProject="student/src/main/java" 
     	type="XMLMAPPER" />
     	
-	 <table tableName="user"
+	 <!-- <table tableName="user"
 		enableCountByExample="true" enableUpdateByExample="true"
 		enableDeleteByExample="true" enableSelectByExample="true"
 		selectByExampleQueryId="false" 
@@ -53,7 +53,7 @@
 		enableCountByExample="true" enableUpdateByExample="true"
 		enableDeleteByExample="true" enableSelectByExample="true"
 		selectByExampleQueryId="false" 
-		domainObjectName="UserMessage" />
+		domainObjectName="UserMessage" /> -->
 	<!-- <table tableName="show_message"
 		enableCountByExample="true" enableUpdateByExample="true"
 		enableDeleteByExample="true" enableSelectByExample="true"
@@ -74,5 +74,15 @@
 		enableDeleteByExample="true" enableSelectByExample="true"
 		selectByExampleQueryId="false" 
 		domainObjectName="SchoolInfo" /> -->
+	<!-- <table tableName="business_user"
+		enableCountByExample="true" enableUpdateByExample="true"
+		enableDeleteByExample="true" enableSelectByExample="true"
+		selectByExampleQueryId="false" 
+		domainObjectName="businessUser" /> -->
+	<table tableName="busi_user_message"
+		enableCountByExample="true" enableUpdateByExample="true"
+		enableDeleteByExample="true" enableSelectByExample="true"
+		selectByExampleQueryId="false" 
+		domainObjectName="BusiUserMessage" />
   </context>
 </generatorConfiguration>
