@@ -29,10 +29,8 @@ public interface JobInfoMapper {
     int updateByPrimaryKeySelective(JobInfo record);
 
     int updateByPrimaryKey(JobInfo record);
-    
-    
-    
-    List<JobInfo> selectByPage(Map<String, Integer> map);
+
+	List<JobInfo> selectByPage(Map<String, Object> map);
 
 	List<JobInfo> selectByPageAndJobName(Map<String, Object> map);
 }

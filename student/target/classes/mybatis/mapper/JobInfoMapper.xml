@@ -10,6 +10,7 @@
     <result column="number" jdbcType="VARCHAR" property="number" />
     <result column="createTime" jdbcType="VARCHAR" property="createtime" />
     <result column="endTime" jdbcType="VARCHAR" property="endtime" />
+    <result column="publish" jdbcType="VARCHAR" property="publish" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    job_id, job_name, job_intruduce, job_order, salary, number, createTime, endTime
+    job_id, job_name, job_intruduce, job_order, salary, number, createTime, endTime, 
+    publish
   </sql>
   <select id="selectByExample" parameterType="com.student.dao.mapper.bo.JobInfoExample" resultMap="BaseResultMap">
     select
@@ -106,10 +108,12 @@
   <insert id="insert" parameterType="com.student.dao.mapper.bo.JobInfo">
     insert into jobinfo (job_id, job_name, job_intruduce, 
       job_order, salary, number, 
-      createTime, endTime)
+      createTime, endTime, publish
+      )
     values (#{jobId,jdbcType=VARCHAR}, #{jobName,jdbcType=VARCHAR}, #{jobIntruduce,jdbcType=VARCHAR}, 
       #{jobOrder,jdbcType=VARCHAR}, #{salary,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, 
-      #{createtime,jdbcType=VARCHAR}, #{endtime,jdbcType=VARCHAR})
+      #{createtime,jdbcType=VARCHAR}, #{endtime,jdbcType=VARCHAR}, #{publish,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.student.dao.mapper.bo.JobInfo">
     insert into jobinfo
@@ -138,6 +142,9 @@
       <if test="endtime != null">
         endTime,
       </if>
+      <if test="publish != null">
+        publish,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="jobId != null">
@@ -163,6 +170,9 @@
       </if>
       <if test="endtime != null">
         #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="publish != null">
+        #{publish,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -199,6 +209,9 @@
       <if test="record.endtime != null">
         endTime = #{record.endtime,jdbcType=VARCHAR},
       </if>
+      <if test="record.publish != null">
+        publish = #{record.publish,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -213,7 +226,8 @@
       salary = #{record.salary,jdbcType=VARCHAR},
       number = #{record.number,jdbcType=VARCHAR},
       createTime = #{record.createtime,jdbcType=VARCHAR},
-      endTime = #{record.endtime,jdbcType=VARCHAR}
+      endTime = #{record.endtime,jdbcType=VARCHAR},
+      publish = #{record.publish,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -242,6 +256,9 @@
       <if test="endtime != null">
         endTime = #{endtime,jdbcType=VARCHAR},
       </if>
+      <if test="publish != null">
+        publish = #{publish,jdbcType=VARCHAR},
+      </if>
     </set>
     where job_id = #{jobId,jdbcType=VARCHAR}
   </update>
@@ -253,16 +270,18 @@
       salary = #{salary,jdbcType=VARCHAR},
       number = #{number,jdbcType=VARCHAR},
       createTime = #{createtime,jdbcType=VARCHAR},
-      endTime = #{endtime,jdbcType=VARCHAR}
+      endTime = #{endtime,jdbcType=VARCHAR},
+      publish = #{publish,jdbcType=VARCHAR}
     where job_id = #{jobId,jdbcType=VARCHAR}
   </update>
   
   
   <select id="selectByPage" parameterType="map" resultMap="BaseResultMap">
-  	select * from jobinfo ORDER BY CAST(job_id AS SIGNED INTEGER) limit #{low,jdbcType=INTEGER},#{hight,jdbcType=INTEGER}
+  	select * from jobinfo where publish = #{name,jdbcType=VARCHAR}
+  	ORDER BY CAST(job_id AS SIGNED INTEGER) limit #{low,jdbcType=INTEGER},#{hight,jdbcType=INTEGER}
   </select>
   <select id="selectByPageAndJobName" parameterType="map" resultMap="BaseResultMap">
-  	select * from jobinfo where job_name like #{jobName,jdbcType=VARCHAR}
+  	select * from jobinfo where publish = #{name,jdbcType=VARCHAR} and job_name like #{jobName,jdbcType=VARCHAR}
   		ORDER BY CAST(job_id AS SIGNED INTEGER) 
   		limit #{low,jdbcType=INTEGER},#{hight,jdbcType=INTEGER}
   </select>

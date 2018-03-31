@@ -663,6 +663,76 @@ public class JobInfoExample {
             addCriterion("endTime not between", value1, value2, "endtime");
             return (Criteria) this;
         }
+
+        public Criteria andPublishIsNull() {
+            addCriterion("publish is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishIsNotNull() {
+            addCriterion("publish is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishEqualTo(String value) {
+            addCriterion("publish =", value, "publish");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishNotEqualTo(String value) {
+            addCriterion("publish <>", value, "publish");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishGreaterThan(String value) {
+            addCriterion("publish >", value, "publish");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishGreaterThanOrEqualTo(String value) {
+            addCriterion("publish >=", value, "publish");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishLessThan(String value) {
+            addCriterion("publish <", value, "publish");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishLessThanOrEqualTo(String value) {
+            addCriterion("publish <=", value, "publish");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishLike(String value) {
+            addCriterion("publish like", value, "publish");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishNotLike(String value) {
+            addCriterion("publish not like", value, "publish");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishIn(List<String> values) {
+            addCriterion("publish in", values, "publish");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishNotIn(List<String> values) {
+            addCriterion("publish not in", values, "publish");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishBetween(String value1, String value2) {
+            addCriterion("publish between", value1, value2, "publish");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishNotBetween(String value1, String value2) {
+            addCriterion("publish not between", value1, value2, "publish");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -90,6 +90,7 @@ $(function(){
 	
 	$('#dg').datagrid({
 		width:1000,
+		height:400,
 		fitColumns:true,
 		title:'发布就业信息',
 		pagination:true,

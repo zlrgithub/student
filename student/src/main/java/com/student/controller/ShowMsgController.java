@@ -431,6 +431,7 @@ public class ShowMsgController {
     public @ResponseBody Object releaseJobInfoGet(HttpServletRequest request,
     		HttpServletResponse response,int page,int rows,String jobName) {
     	Map<String,Object> map = new HashMap<>();
+    	HttpSession httpSession = request.getSession();
     	/*if( null == jobName ){
     		if( null == createTime ){
     			if( null == endTime ){
@@ -501,16 +502,16 @@ public class ShowMsgController {
     		}
     	}*/
     	if( null == jobName ){
-    		List<JobInfo> releaseJobInfos = iJobInfo.selectByPage((page-1)*rows,page*rows);
+    		List<JobInfo> releaseJobInfos = iJobInfo.selectByPage((page-1)*rows,page*rows,String.valueOf(httpSession.getAttribute("name")));
 	    	JobInfoExample example = new JobInfoExample();
-	    	example.createCriteria().andJobIdIsNotNull();
+	    	example.createCriteria().andJobIdIsNotNull().andPublishEqualTo(String.valueOf(httpSession.getAttribute("name")));
 	    	Long total = jobInfoMapper.countByExample(example);
 	    	map.put("total", total);
 	    	map.put("rows", JSON.toJSON(releaseJobInfos));
     	}else{
-    		List<JobInfo> releaseJobInfos = iJobInfo.selectByPageAndJobName((page-1)*rows,page*rows,"%"+jobName+"%");
+    		List<JobInfo> releaseJobInfos = iJobInfo.selectByPageAndJobName((page-1)*rows,page*rows,"%"+jobName+"%",String.valueOf(httpSession.getAttribute("name")));
 	    	JobInfoExample example = new JobInfoExample();
-	    	example.createCriteria().andJobIdIsNotNull().andJobNameLike("%"+jobName+"%");
+	    	example.createCriteria().andJobIdIsNotNull().andPublishEqualTo(String.valueOf(httpSession.getAttribute("name"))).andJobNameLike("%"+jobName+"%");
 	    	Long total = jobInfoMapper.countByExample(example);
 	    	map.put("total", total);
 	    	map.put("rows", JSON.toJSON(releaseJobInfos));
@@ -521,6 +522,7 @@ public class ShowMsgController {
     @RequestMapping(value = "/releaseJobInfoGet2.do",method=RequestMethod.POST)
     public @ResponseBody Object releaseJobInfoGet2(HttpServletRequest request) {
     	
+    	HttpSession httpSession = request.getSession();
     	String jobInfoJson = request.getParameter("itemInfo");
     	Gson gson = new Gson();
     	JobInfo jobInfo = gson.fromJson( request.getParameter("itemInfo"), JobInfo.class);
@@ -534,6 +536,7 @@ public class ShowMsgController {
     			example.setOrderByClause("CAST(job_id AS SIGNED INTEGER) desc");
     			List<JobInfo> list = jobInfoMapper.selectByExample(example);
     			jobInfo.setJobId(String.valueOf(Integer.valueOf(list.get(0).getJobId())+1));
+    			jobInfo.setPublish(String.valueOf(httpSession.getAttribute("name")));
     			jobInfoMapper.insert(jobInfo);
     		}
     	}

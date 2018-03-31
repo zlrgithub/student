@@ -17,6 +17,8 @@ public class JobInfo {
 
     private String endtime;
 
+    private String publish;
+
     public String getJobId() {
         return jobId;
     }
@@ -79,5 +81,13 @@ public class JobInfo {
 
     public void setEndtime(String endtime) {
         this.endtime = endtime;
+    }
+
+    public String getPublish() {
+        return publish;
+    }
+
+    public void setPublish(String publish) {
+        this.publish = publish;
     }
 }

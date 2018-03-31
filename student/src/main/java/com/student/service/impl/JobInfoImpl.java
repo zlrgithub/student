@@ -20,18 +20,20 @@ public class JobInfoImpl implements IJobInfo{
 	@Resource
 	private JobInfoMapper jobInfoMapper;
 	@Override
-	public List<JobInfo> selectByPage(int low, int hight) {
-		Map<String, Integer> map = new HashMap<>();
+	public List<JobInfo> selectByPage(int low, int hight,String name) {
+		Map<String, Object> map = new HashMap<>();
 		map.put("low", low);
 		map.put("hight", hight);
+		map.put("name", name);
 		return jobInfoMapper.selectByPage(map);
 	}
 	@Override
-	public List<JobInfo> selectByPageAndJobName(int low, int hight, String jobName) {
+	public List<JobInfo> selectByPageAndJobName(int low, int hight, String name, String jobName) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("low", low);
 		map.put("hight", hight);
 		map.put("jobName", jobName);
+		map.put("name", name);
 		return jobInfoMapper.selectByPageAndJobName(map);
 	}
 	
