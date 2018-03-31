@@ -34,7 +34,7 @@ String roleType = httpSession.getAttribute("roleType").toString();
 					<font>数据分析</font></a></li><br>
 				<li><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/showMessage/selectByMe')">
 					<font>自定义查询</font></a></li><br>
-				<li id = "jobInfo" style="display: none"><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/showMessage/selectByMe')">
+				<li id = "jobInfo" style="display: none"><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/showMessage/releaseJobInfo')">
 					<font>发布招聘信息</font></a></li><br>
 			</ul>
 		</div>

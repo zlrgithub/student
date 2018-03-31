@@ -36,9 +36,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mysql.fabric.xmlrpc.base.Array;
 import com.student.dao.mapper.bo.UserMessageExample.Criteria;
+import com.student.dao.mapper.interfaces.JobInfoMapper;
+import com.student.dao.mapper.bo.JobInfo;
+import com.student.dao.mapper.bo.JobInfoExample;
 import com.student.dao.mapper.bo.SchoolInfo;
 import com.student.dao.mapper.bo.UserMessage;
 import com.student.dao.mapper.bo.UserMessageExample;
+import com.student.service.interfaces.IJobInfo;
 import com.student.service.interfaces.ISchool;
 import com.student.service.interfaces.IUserMessage;
 import com.student.until.CityInfo;
@@ -55,6 +59,12 @@ public class ShowMsgController {
 	
 	@Autowired
 	private ISchool iSchool;
+	
+	@Autowired
+	private IJobInfo iJobInfo;
+	
+	@Autowired
+	private JobInfoMapper jobInfoMapper;
 	
 	@RequestMapping("/showMain")
 	public String showMain(){
@@ -82,6 +92,10 @@ public class ShowMsgController {
 	@RequestMapping("/selectByMe")
 	public String selectByMe(){
 		return "selectByMe";
+	}
+	@RequestMapping("/releaseJobInfo")
+	public String releaseJobInfo(){
+		return "releaseJobInfo";
 	}
 	@RequestMapping(value = "/cityInfoGet.do",method=RequestMethod.POST)
 	public @ResponseBody Object cityInfoGet(HttpServletRequest request,HttpServletResponse response){
@@ -411,5 +425,126 @@ public class ShowMsgController {
     	
     	logger.info(""+JSON.toJSONString(selectByMeIndex));
     	return JSONObject.parse(JSON.toJSONString(selectByMeIndex));
+    }
+    
+    @RequestMapping(value = "/releaseJobInfoGet.do",method=RequestMethod.POST)
+    public @ResponseBody Object releaseJobInfoGet(HttpServletRequest request,
+    		HttpServletResponse response,int page,int rows,String jobName) {
+    	Map<String,Object> map = new HashMap<>();
+    	/*if( null == jobName ){
+    		if( null == createTime ){
+    			if( null == endTime ){
+			    	List<JobInfo> releaseJobInfos = iJobInfo.selectByPage((page-1)*rows,page*rows);
+			    	JobInfoExample example = new JobInfoExample();
+			    	example.createCriteria().andJobIdIsNotNull();
+			    	Long total = jobInfoMapper.countByExample(example);
+			    	map.put("total", total);
+			    	map.put("rows", JSON.toJSON(releaseJobInfos));
+    			}else{
+    				List<JobInfo> releaseJobInfos = iJobInfo.selectByPage((page-1)*rows,page*rows);
+			    	JobInfoExample example = new JobInfoExample();
+			    	example.createCriteria().andJobIdIsNotNull().andEndtimeLessThanOrEqualTo(endTime);
+			    	Long total = jobInfoMapper.countByExample(example);
+			    	map.put("total", total);
+			    	map.put("rows", JSON.toJSON(releaseJobInfos));
+    			}
+    		}else{
+    			if( null == endTime ){
+    				List<JobInfo> releaseJobInfos = iJobInfo.selectByPage((page-1)*rows,page*rows);
+    		    	JobInfoExample example = new JobInfoExample();
+    		    	example.createCriteria().andJobIdIsNotNull().andCreatetimeGreaterThanOrEqualTo(createTime);
+    		    	Long total = jobInfoMapper.countByExample(example);
+    		    	map.put("total", total);
+    		    	map.put("rows", JSON.toJSON(releaseJobInfos));
+    			}else{
+    				List<JobInfo> releaseJobInfos = iJobInfo.selectByPage((page-1)*rows,page*rows);
+    		    	JobInfoExample example = new JobInfoExample();
+    		    	example.createCriteria().andJobIdIsNotNull().andCreatetimeGreaterThanOrEqualTo(createTime).andEndtimeLessThanOrEqualTo(endTime);
+    		    	Long total = jobInfoMapper.countByExample(example);
+    		    	map.put("total", total);
+    		    	map.put("rows", JSON.toJSON(releaseJobInfos));
+    			}
+    		}
+    	}else{
+    		if( null == createTime ){
+    			if( null == endTime ){
+		    		List<JobInfo> releaseJobInfos = iJobInfo.selectByPage((page-1)*rows,page*rows);
+			    	JobInfoExample example = new JobInfoExample();
+			    	example.createCriteria().andJobIdIsNotNull().andJobNameLike(jobName);
+			    	Long total = jobInfoMapper.countByExample(example);
+			    	map.put("total", total);
+			    	map.put("rows", JSON.toJSON(releaseJobInfos));
+    			}else{
+    				List<JobInfo> releaseJobInfos = iJobInfo.selectByPage((page-1)*rows,page*rows);
+			    	JobInfoExample example = new JobInfoExample();
+			    	example.createCriteria().andJobIdIsNotNull().andJobNameLike(jobName).andEndtimeLessThanOrEqualTo(endTime);
+			    	Long total = jobInfoMapper.countByExample(example);
+			    	map.put("total", total);
+			    	map.put("rows", JSON.toJSON(releaseJobInfos));
+    			}
+    		}else{
+    			if( null == endTime ){
+	    			List<JobInfo> releaseJobInfos = iJobInfo.selectByPage((page-1)*rows,page*rows);
+			    	JobInfoExample example = new JobInfoExample();
+			    	example.createCriteria().andJobIdIsNotNull().andJobNameLike(jobName).andCreatetimeGreaterThanOrEqualTo(createTime);
+			    	Long total = jobInfoMapper.countByExample(example);
+			    	map.put("total", total);
+			    	map.put("rows", JSON.toJSON(releaseJobInfos));
+    			}else{
+    				List<JobInfo> releaseJobInfos = iJobInfo.selectByPage((page-1)*rows,page*rows);
+			    	JobInfoExample example = new JobInfoExample();
+			    	example.createCriteria().andJobIdIsNotNull().andJobNameLike(jobName).andCreatetimeGreaterThanOrEqualTo(createTime).andEndtimeLessThanOrEqualTo(endTime);
+			    	Long total = jobInfoMapper.countByExample(example);
+			    	map.put("total", total);
+			    	map.put("rows", JSON.toJSON(releaseJobInfos));
+    			}
+    		}
+    	}*/
+    	if( null == jobName ){
+    		List<JobInfo> releaseJobInfos = iJobInfo.selectByPage((page-1)*rows,page*rows);
+	    	JobInfoExample example = new JobInfoExample();
+	    	example.createCriteria().andJobIdIsNotNull();
+	    	Long total = jobInfoMapper.countByExample(example);
+	    	map.put("total", total);
+	    	map.put("rows", JSON.toJSON(releaseJobInfos));
+    	}else{
+    		List<JobInfo> releaseJobInfos = iJobInfo.selectByPageAndJobName((page-1)*rows,page*rows,"%"+jobName+"%");
+	    	JobInfoExample example = new JobInfoExample();
+	    	example.createCriteria().andJobIdIsNotNull().andJobNameLike("%"+jobName+"%");
+	    	Long total = jobInfoMapper.countByExample(example);
+	    	map.put("total", total);
+	    	map.put("rows", JSON.toJSON(releaseJobInfos));
+    	}
+    	logger.info("showMsgController SelectJobInfo:"+jobName+JSON.toJSONString(map));
+    	return JSONObject.parse(JSON.toJSONString(map));
+    }
+    @RequestMapping(value = "/releaseJobInfoGet2.do",method=RequestMethod.POST)
+    public @ResponseBody Object releaseJobInfoGet2(HttpServletRequest request) {
+    	
+    	String jobInfoJson = request.getParameter("itemInfo");
+    	Gson gson = new Gson();
+    	JobInfo jobInfo = gson.fromJson( request.getParameter("itemInfo"), JobInfo.class);
+    	
+    	logger.info("showMsgController JobInfo"+request.getParameter("itemInfo"));
+    	if( null != jobInfo ){
+    		if( null != jobInfo.getJobId() ){
+    			jobInfoMapper.updateByPrimaryKey(jobInfo);
+    		}else{
+    			JobInfoExample example = new JobInfoExample();
+    			example.setOrderByClause("CAST(job_id AS SIGNED INTEGER) desc");
+    			List<JobInfo> list = jobInfoMapper.selectByExample(example);
+    			jobInfo.setJobId(String.valueOf(Integer.valueOf(list.get(0).getJobId())+1));
+    			jobInfoMapper.insert(jobInfo);
+    		}
+    	}
+    	List<JobInfo> jobInfo2 = gson.fromJson( request.getParameter("delItems"),new TypeToken<List<JobInfo>>(){}.getType());
+    	if( null != jobInfo2 && !jobInfo2.isEmpty() ){
+    		for( JobInfo info : jobInfo2 ){
+    			JobInfoExample example = new JobInfoExample();
+        		example.createCriteria().andJobIdEqualTo(info.getJobId());
+        		jobInfoMapper.deleteByExample(example);
+        	}
+    	}
+    	return "success";
     }
 }

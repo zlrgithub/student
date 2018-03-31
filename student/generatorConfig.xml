@@ -2,7 +2,7 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
   <!-- 数据库驱动 -->  
-  <classPathEntry location="C:\Users\acer\.m2\repository\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar" />
+  <classPathEntry location="C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar" />
   <context id="context1" targetRuntime="MyBatis3">
   	<!-- 禁用mybatis插件自动生成的注释 -->  
 	<commentGenerator>
@@ -79,10 +79,15 @@
 		enableDeleteByExample="true" enableSelectByExample="true"
 		selectByExampleQueryId="false" 
 		domainObjectName="businessUser" /> -->
-	<table tableName="busi_user_message"
+	<!-- <table tableName="busi_user_message"
 		enableCountByExample="true" enableUpdateByExample="true"
 		enableDeleteByExample="true" enableSelectByExample="true"
 		selectByExampleQueryId="false" 
-		domainObjectName="BusiUserMessage" />
+		domainObjectName="BusiUserMessage" /> -->
+	<table tableName="jobinfo"
+		enableCountByExample="true" enableUpdateByExample="true"
+		enableDeleteByExample="true" enableSelectByExample="true"
+		selectByExampleQueryId="false" 
+		domainObjectName="JobInfo" />
   </context>
 </generatorConfiguration>
