@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.student.dao.mapper.bo.SchoolInfo;
-import com.student.dao.mapper.bo.SchoolInfoExample;
 import com.student.dao.mapper.interfaces.SchoolInfoMapper;
 import com.student.service.interfaces.ISchool;
 @Service

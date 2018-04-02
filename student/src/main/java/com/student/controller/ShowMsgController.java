@@ -9,17 +9,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.json.Json;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.junit.Test;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,25 +23,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.asm.Type;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.mysql.fabric.xmlrpc.base.Array;
-import com.student.dao.mapper.bo.UserMessageExample.Criteria;
 import com.student.dao.mapper.interfaces.JobInfoMapper;
 import com.student.dao.mapper.bo.JobInfo;
 import com.student.dao.mapper.bo.JobInfoExample;
 import com.student.dao.mapper.bo.SchoolInfo;
-import com.student.dao.mapper.bo.UserMessage;
 import com.student.dao.mapper.bo.UserMessageExample;
 import com.student.service.interfaces.IJobInfo;
 import com.student.service.interfaces.ISchool;
 import com.student.service.interfaces.IUserMessage;
 import com.student.until.CityInfo;
 import com.student.until.WorkInfoMap;
-import com.sun.xml.internal.ws.api.policy.PolicyResolver.ServerContext;
 
 @Controller  
 @RequestMapping("/showMessage")
@@ -163,7 +151,7 @@ public class ShowMsgController {
 		param = new HashMap<>();
 		param.put("cityName", cityName);
 		param.put("year", year);
-		String[] noJobInfos = {"1","2","3","4","5","6","7"};
+		String[] noJobInfos = {"0","1","2","3","4","5","6"};
 		String[] comTypeInfo = {"国有企业","外资企业","私有企业","事业单位","股份制公司","合资企业","上市公司"};
 		List<List<CityInfo>> compTypeAndJobs = new ArrayList<>();
 		for(int k=0 ;k< noJobInfos.length ; k++){
@@ -210,10 +198,10 @@ public class ShowMsgController {
 		param.put("year", year);
 		List<CityInfo> topTenJob = iUserMessage.selectTopTenJob(param);
 		cityInfo.put("topTenJob", topTenJob);
-		logger.info("所有数据："+JSONObject.parse(JSON.toJSONString(cityInfo)));
+		logger.info("所有数据："+JSON.parse(JSON.toJSONString(cityInfo)));
 		/*省级数据处理结束*/
 		
-		return JSONObject.parse(JSON.toJSONString(cityInfo));
+		return JSON.parse(JSON.toJSONString(cityInfo));
 	}
     @RequestMapping(value = "/workInfoMap.do",method=RequestMethod.POST)
     public @ResponseBody Object getWorkInfoMap(HttpServletRequest request,HttpServletResponse response) {  
@@ -279,7 +267,7 @@ public class ShowMsgController {
     	String string=null;
 		string = JSON.toJSONString(mapInfoList);
 		logger.info(string);
-    	return  JSONObject.parse(string);
+    	return  JSON.parse(string);
     }
     
     class A{
@@ -406,7 +394,7 @@ public class ShowMsgController {
     	num.put("perCount", a);
     	num.put("perCount2", b);
     	System.out.println(JSON.toJSONString(num));
-    	return JSONObject.parse(JSON.toJSONString(num));
+    	return JSON.parse(JSON.toJSONString(num));
     }
     
     @RequestMapping(value = "/selectByMeIndex.do",method=RequestMethod.POST)
@@ -424,7 +412,7 @@ public class ShowMsgController {
     	selectByMeIndex.put("majorNames", majorNames);
     	
     	logger.info(""+JSON.toJSONString(selectByMeIndex));
-    	return JSONObject.parse(JSON.toJSONString(selectByMeIndex));
+    	return JSON.parse(JSON.toJSONString(selectByMeIndex));
     }
     
     @RequestMapping(value = "/releaseJobInfoGet.do",method=RequestMethod.POST)
@@ -517,7 +505,7 @@ public class ShowMsgController {
 	    	map.put("rows", JSON.toJSON(releaseJobInfos));
     	}
     	logger.info("showMsgController SelectJobInfo:"+jobName+JSON.toJSONString(map));
-    	return JSONObject.parse(JSON.toJSONString(map));
+    	return JSON.parse(JSON.toJSONString(map));
     }
     @RequestMapping(value = "/releaseJobInfoGet2.do",method=RequestMethod.POST)
     public @ResponseBody Object releaseJobInfoGet2(HttpServletRequest request) {

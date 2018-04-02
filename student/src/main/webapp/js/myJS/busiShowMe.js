@@ -21,7 +21,7 @@ $(document).ready(function(){
 			var tr8 = op2 + "</select>";
 			//var tr7 = "<input id = 'companyType' type='text' disabled='disabled' value='"+jsonObj.companyType+"' />";
 			var tr9 = "<input id = 'companyAddress' type='text' disabled='disabled' value='"+jsonObj.companyaddress+"' />";
-			var tr10 = "<input id = 'companyIntroduce' type='text' disabled='disabled' value='"+jsonObj.companyIntroduce+"' />";
+			var tr10 = "<textarea rows=\"3\" id = 'companyIntroduce' disabled='disabled'>" +jsonObj.companyIntroduce+"</textarea>";
 			var tr11 = "<input id = 'companyWeb' type='text' disabled='disabled' value='"+jsonObj.companyWeb+"' />";
 			
 			$("#tb1").append(tr1);

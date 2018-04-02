@@ -1,17 +1,13 @@
 package com.student.controller;
   
 import java.io.IOException;
-import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.json.JsonObject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
-
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -34,14 +30,10 @@ import com.student.dao.mapper.bo.UserMessageExample;
 import com.student.dao.mapper.bo.businessUser;
 import com.student.dao.mapper.bo.businessUserExample;
 import com.student.dao.mapper.interfaces.BusiUserMessageMapper;
-import com.student.dao.mapper.interfaces.UserMessageMapper;
 import com.student.dao.mapper.interfaces.businessUserMapper;
 import com.student.service.interfaces.ISchool;
 import com.student.service.interfaces.IUserMessage;
 import com.student.service.interfaces.UserInsert;
-import com.sun.net.httpserver.Authenticator.Success;
-
-import javafx.scene.control.Alert;
 
 @Controller  
 @RequestMapping("/user")  
@@ -268,7 +260,7 @@ public class UserController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-	    	return  JSONObject.parse(string);  
+	    	return  JSON.parse(string);  
     	} else{
     		BusiUserMessageExample example =new BusiUserMessageExample();
 	    	example.createCriteria().andUserIdEqualTo(name);
@@ -303,7 +295,7 @@ public class UserController {
 			     message.setCompanyWeb("");
 			     string = JSON.toJSONString(message);
 			}
-    		return JSONObject.parse(string);
+    		return JSON.parse(string);
     	}
     }
     @RequestMapping(value = "/showMeChange.do",method=RequestMethod.POST)

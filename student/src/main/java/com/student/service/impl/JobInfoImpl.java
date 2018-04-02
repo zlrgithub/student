@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.student.dao.mapper.bo.JobInfo;
 import com.student.dao.mapper.interfaces.JobInfoMapper;
-import com.student.dao.mapper.interfaces.SchoolInfoMapper;
 import com.student.service.interfaces.IJobInfo;
 @Service
 @Transactional

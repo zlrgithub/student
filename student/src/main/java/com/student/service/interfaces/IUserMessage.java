@@ -6,7 +6,6 @@ import java.util.Map;
 import com.student.dao.mapper.bo.UserMessage;
 import com.student.dao.mapper.bo.UserMessageExample;
 import com.student.until.CityInfo;
-import com.student.until.WorkInfoMap;
 
 public interface IUserMessage {
 	int insert(UserMessage userMessage);

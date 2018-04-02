@@ -1,8 +1,9 @@
 td {
-	width: 20px;
+	width:30%;
 	height:30px;
 	font-size:15px;
 	text-align: right;
+	vertical-align: top;
 }
 a {
 	font-size: 15px;
@@ -11,13 +12,18 @@ a {
 	background-color: #0000FF;
 }
 .tables {
-	width: 100%;
+	width: 70%;
 	height: 100%;
-	float: left;
+	float: right;
 }
 input {
-	width: 100%;
+	width: 90%;
+	background-color: white;
 }
 select {
-	width: 100%;
+	width: 90%;
+}
+textarea {
+	background-color:white;
+	width: 90%;
 }

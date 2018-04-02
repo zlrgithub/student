@@ -26,7 +26,7 @@
 		<br><br>
 		<div align="left" style="width: 100%;height:400px; ;float: left;">
 
-			<div style="float: left;width: 30%;">
+			<div style="float: left;width: 55%;" align="right">
 				<table class="tables">
 						<tr>
 							<td>账号：</td>
@@ -57,7 +57,7 @@
 							<td id="tb7"></td>
 						</tr>
 						<tr>
-							<td>公司类型</td>
+							<td>公司类型：</td>
 							<td id="tb8"></td>
 						</tr>
 						<tr>
@@ -65,12 +65,12 @@
 							<td id="tb9"></td>
 						</tr>
 						<tr>
-							<td>公司简介：</td>
-							<td id="tb10"></td>
-						</tr>
-						<tr>
 							<td>公司网站：</td>
 							<td id="tb11"></td>
+						</tr>
+						<tr>
+							<td>公司简介：</td>
+							<td id="tb10"></td>
 						</tr>
 				</table>
 			</div>

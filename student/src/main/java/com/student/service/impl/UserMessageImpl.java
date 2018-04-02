@@ -14,7 +14,6 @@ import com.student.dao.mapper.bo.UserMessageExample;
 import com.student.dao.mapper.interfaces.UserMessageMapper;
 import com.student.service.interfaces.IUserMessage;
 import com.student.until.CityInfo;
-import com.student.until.WorkInfoMap;
 
 @Service
 @Transactional

@@ -86,7 +86,7 @@ function companyTypeandJob(cityData){
 		    series: [{
 		    	name: [],
 		        data: [],
-		        radius : '55%',
+		        radius : '50%',
 	            center: ['50%', '60%'],
 		        itemStyle : { normal: {label : {show: true,formatter: '{b}{d}%'}}},
 		        type: 'pie'
@@ -493,11 +493,13 @@ function trainAndJob(cityData){
 		    title : {
 		        text: '实习时长与就业',
 		        x:'center'
-		    },
+		    },/*
 		    tooltip : {
 		        trigger: 'item'
-		    },
+		    },*/
 		    legend: {
+		        y: 40,
+		        bottom: 100,
 		        orient: 'vertical',
 		        x: 0,
 		        data: []
@@ -506,7 +508,7 @@ function trainAndJob(cityData){
 		        {
 		            name: '访问来源',
 		            type: 'pie',
-		            radius : '55%',
+		            radius : '50%',
 		            center: ['50%', '60%'],
 		            data:[],
 		            itemStyle : { normal: {label : {show: true,formatter: '{b}{d}%'}}},

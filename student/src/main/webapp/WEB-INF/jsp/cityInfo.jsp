@@ -26,11 +26,11 @@ String cityName = session.getAttribute("cityName").toString(); //从session里�
 		<h2><%=cityName%>毕业生就业情况</h2>
 	</div>
 	<div id="successiveGraduation"></div>
-	<div id="topTenJob"></div>
+	<div id="topTenJob" class="div2"></div>
 	<div id="companyTypeandJob"></div>
-	<div id="threeTypeChange"></div>
+	<div id="threeTypeChange" class="div2"></div>
 	<div id="employmentRate"></div>
-	<div id="trainAndJob"></div>
+	<div id="trainAndJob" class="div2"></div>
 	<div id="majorJobRate"></div>
 	
 	

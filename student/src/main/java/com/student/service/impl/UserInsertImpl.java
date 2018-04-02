@@ -6,13 +6,10 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.student.dao.mapper.bo.User;
-import com.student.dao.mapper.bo.UserExample;
 import com.student.dao.mapper.interfaces.UserMapper;
 import com.student.service.interfaces.UserInsert;
 @Service

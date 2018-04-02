@@ -31,15 +31,20 @@ String roleType = httpSession.getAttribute("roleType").toString();
 				<li><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/user/showMe')">
 					<font>用户信息</font></a></li><br>
 				<li><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/showMessage/showMain')">
-					<font>数据分析</font></a></li><br>
+					<font>就业生数据</font></a></li><br>
 				<li><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/showMessage/selectByMe')">
 					<font>自定义查询</font></a></li><br>
+				<li><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/jobMsgController/jobInfo')">
+					<font>招聘信息查询</font></a></li><br>
 				<li id = "jobInfo" style="display: none"><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/showMessage/releaseJobInfo')">
 					<font>发布招聘信息</font></a></li><br>
 			</ul>
 		</div>
 		<div id="content" region="center" title=" ">
-			<iframe id = "showView" src ='http://localhost:8080/student/showMessage/showMain' 
+			<!-- <iframe id = "showView" src ='http://localhost:8080/student/showMessage/showMain' 
+				style="width: 98%;height: 98%;border: 0px;">
+			</iframe> -->
+			<iframe id = "showView" src ='http://localhost:8080/student/jobMsgController/jobInfo' 
 				style="width: 98%;height: 98%;border: 0px;">
 			</iframe>
 		</div>

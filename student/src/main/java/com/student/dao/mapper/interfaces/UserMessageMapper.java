@@ -3,8 +3,6 @@ package com.student.dao.mapper.interfaces;
 import com.student.dao.mapper.bo.UserMessage;
 import com.student.dao.mapper.bo.UserMessageExample;
 import com.student.until.CityInfo;
-import com.student.until.WorkInfoMap;
-
 import java.util.List;
 import java.util.Map;
 
