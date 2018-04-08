@@ -6,11 +6,36 @@ body{
 	
 }
 
-td{
+.td1{
 	height: 50px;
 	width: 80px;
 	text-align: left;
 	vertical-align: middle;
+}
+
+.td2{
+	font-size:15px;
+	width: 80px;
+	height: 30px;
+	text-align: left;
+	vertical-align: middle;
+	border-bottom:1px solid black;
+}
+
+.td3{
+	font-size:15px;
+	height: 30px;
+	width: 300px;
+	text-align: left;
+	vertical-align: middle;
+	border-bottom:1px solid black;
+	padding-left: 30px;
+}
+.td4{
+	height: 15px;
+	text-align: left;
+	vertical-align: middle;
+	border-bottom:1px solid black;
 }
 .img2 {
 	width: 160px;
@@ -18,6 +43,9 @@ td{
 .img3{
 	width: 100%;
 }
-div{
-	
+
+a{
+	color: black;
+	text-decoration: none;
+	font-size:15px;
 }

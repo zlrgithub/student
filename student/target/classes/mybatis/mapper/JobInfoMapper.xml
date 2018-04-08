@@ -275,14 +275,57 @@
     where job_id = #{jobId,jdbcType=VARCHAR}
   </update>
   
-  
+ 
   <select id="selectByPage" parameterType="map" resultMap="BaseResultMap">
   	select * from jobinfo where publish = #{name,jdbcType=VARCHAR}
   	ORDER BY CAST(job_id AS SIGNED INTEGER) limit #{low,jdbcType=INTEGER},#{hight,jdbcType=INTEGER}
   </select>
   <select id="selectByPageAndJobName" parameterType="map" resultMap="BaseResultMap">
-  	select * from jobinfo where publish = #{name,jdbcType=VARCHAR} and job_name like #{jobName,jdbcType=VARCHAR}
+  	select * from jobinfo where job_name like #{jobName,jdbcType=VARCHAR} and publish = #{name,jdbcType=VARCHAR} 
   		ORDER BY CAST(job_id AS SIGNED INTEGER) 
   		limit #{low,jdbcType=INTEGER},#{hight,jdbcType=INTEGER}
+  </select>
+  <select id="selectBusiInfoByPage" parameterType="map" resultMap="BaseResultMap">
+  	SELECT t.companyName as job_name,t.company_web as job_intruduce,SUBSTR(t2.createTime,1,8) as createTime FROM (
+		(SELECT DISTINCT companyName,company_web,busi_user_id FROM busi_user_message) t
+		LEFT JOIN (
+			SELECT DISTINCT MIN(createTime) AS createTime,publish FROM jobinfo WHERE createTime >= #{now,jdbcType=VARCHAR}
+		) t2 ON t.busi_user_id = t2.publish
+		)
+	where t.companyName IS NOT NULL  and t.company_web IS NOT NULL  and t2.createTime IS NOT NULL 
+	ORDER BY createTime ASC LIMIT #{proview,jdbcType=INTEGER},#{next,jdbcType=INTEGER}
+  </select>
+  <select id="selectJobInfoBypage" parameterType="map" resultMap="BaseResultMap" >
+	SELECT 
+	  companyName as job_intruduce,
+	  job_name,
+	  number,
+	  salary,
+	  email as job_order,
+	  phone as publish,
+	  endTime
+	FROM
+	  (
+	    (SELECT DISTINCT 
+	      companyName,
+	      email,
+	      phone,
+	      busi_user_id 
+	    FROM
+	      busi_user_message) t 
+	    RIGHT JOIN 
+	      (SELECT 
+	        endTime,
+	        publish,
+	        job_name,
+	        salary,
+	        number 
+	      FROM
+	        jobinfo 
+	      WHERE createTime >= #{now,jdbcType=VARCHAR} AND job_name IS NOT NULL ) t2 
+	      ON t.busi_user_id = t2.publish
+	  ) 
+	ORDER BY endTime ASC 
+	LIMIT #{low,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}
   </select>
 </mapper>

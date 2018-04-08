@@ -1,8 +1,12 @@
 package com.student.controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -417,7 +421,7 @@ public class ShowMsgController {
     
     @RequestMapping(value = "/releaseJobInfoGet.do",method=RequestMethod.POST)
     public @ResponseBody Object releaseJobInfoGet(HttpServletRequest request,
-    		HttpServletResponse response,int page,int rows,String jobName) {
+    		HttpServletResponse response,int page,int rows,String jobName) throws ParseException {
     	Map<String,Object> map = new HashMap<>();
     	HttpSession httpSession = request.getSession();
     	/*if( null == jobName ){
@@ -489,40 +493,63 @@ public class ShowMsgController {
     			}
     		}
     	}*/
+    	SimpleDateFormat dFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	if( null == jobName ){
     		List<JobInfo> releaseJobInfos = iJobInfo.selectByPage((page-1)*rows,page*rows,String.valueOf(httpSession.getAttribute("name")));
 	    	JobInfoExample example = new JobInfoExample();
 	    	example.createCriteria().andJobIdIsNotNull().andPublishEqualTo(String.valueOf(httpSession.getAttribute("name")));
 	    	Long total = jobInfoMapper.countByExample(example);
 	    	map.put("total", total);
+	    	for( int i = 0 ; i < releaseJobInfos.size() ; i++ ){
+	    		Date createdate = dFormat.parse(releaseJobInfos.get(i).getCreatetime());
+	    		releaseJobInfos.get(i).setCreatetime(dateFormat.format(createdate));
+	    		Date enddate = dFormat.parse(releaseJobInfos.get(i).getCreatetime());
+	    		releaseJobInfos.get(i).setEndtime(dateFormat.format(enddate));
+	    	}
 	    	map.put("rows", JSON.toJSON(releaseJobInfos));
     	}else{
-    		List<JobInfo> releaseJobInfos = iJobInfo.selectByPageAndJobName((page-1)*rows,page*rows,"%"+jobName+"%",String.valueOf(httpSession.getAttribute("name")));
+    		List<JobInfo> releaseJobInfos = iJobInfo.selectByPageAndJobName((page-1)*rows,page*rows,String.valueOf(httpSession.getAttribute("name")),"%"+jobName+"%");
 	    	JobInfoExample example = new JobInfoExample();
 	    	example.createCriteria().andJobIdIsNotNull().andPublishEqualTo(String.valueOf(httpSession.getAttribute("name"))).andJobNameLike("%"+jobName+"%");
 	    	Long total = jobInfoMapper.countByExample(example);
+	    	for( int i = 0 ; i < releaseJobInfos.size() ; i++ ){
+	    		Date createdate = dFormat.parse(releaseJobInfos.get(i).getCreatetime());
+	    		releaseJobInfos.get(i).setCreatetime(dateFormat.format(createdate));
+	    		Date enddate = dFormat.parse(releaseJobInfos.get(i).getCreatetime());
+	    		releaseJobInfos.get(i).setEndtime(dateFormat.format(enddate));
+	    	}
 	    	map.put("total", total);
 	    	map.put("rows", JSON.toJSON(releaseJobInfos));
+	    	logger.info("showMsgController SelectJobInfo:"+(page-1)*rows+page*rows+"%"+jobName+"%"+String.valueOf(httpSession.getAttribute("name"))+"||"+jobName+JSON.toJSONString(map));
+
     	}
-    	logger.info("showMsgController SelectJobInfo:"+jobName+JSON.toJSONString(map));
     	return JSON.parse(JSON.toJSONString(map));
     }
     @RequestMapping(value = "/releaseJobInfoGet2.do",method=RequestMethod.POST)
-    public @ResponseBody Object releaseJobInfoGet2(HttpServletRequest request) {
-    	
+    public @ResponseBody Object releaseJobInfoGet2(HttpServletRequest request) throws ParseException {
+
+    	SimpleDateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	SimpleDateFormat dFormat2 = new SimpleDateFormat("yyyyMMddHHmmss");
     	HttpSession httpSession = request.getSession();
-    	String jobInfoJson = request.getParameter("itemInfo");
     	Gson gson = new Gson();
     	JobInfo jobInfo = gson.fromJson( request.getParameter("itemInfo"), JobInfo.class);
-    	
     	logger.info("showMsgController JobInfo"+request.getParameter("itemInfo"));
     	if( null != jobInfo ){
     		if( null != jobInfo.getJobId() ){
+    			Date createDate = dFormat.parse(jobInfo.getCreatetime());
+    			Date endDate = dFormat.parse(jobInfo.getEndtime());
+    			jobInfo.setCreatetime(dFormat2.format(createDate));
+    			jobInfo.setEndtime(dFormat2.format(endDate));
     			jobInfoMapper.updateByPrimaryKey(jobInfo);
     		}else{
     			JobInfoExample example = new JobInfoExample();
     			example.setOrderByClause("CAST(job_id AS SIGNED INTEGER) desc");
     			List<JobInfo> list = jobInfoMapper.selectByExample(example);
+    			Date createDate = dFormat.parse(jobInfo.getCreatetime());
+    			Date endDate = dFormat.parse(jobInfo.getEndtime());
+    			jobInfo.setCreatetime(dFormat.format(createDate));
+    			jobInfo.setEndtime(dFormat.format(endDate));
     			jobInfo.setJobId(String.valueOf(Integer.valueOf(list.get(0).getJobId())+1));
     			jobInfo.setPublish(String.valueOf(httpSession.getAttribute("name")));
     			jobInfoMapper.insert(jobInfo);

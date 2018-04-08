@@ -89,7 +89,7 @@ $(function(){
 	}
 	
 	$('#dg').datagrid({
-		width:1000,
+		width:1100,
 		height:400,
 		fitColumns:true,
 		title:'发布就业信息',
@@ -168,7 +168,7 @@ $(function(){
 		        	  field:'createtime',
 		        	  title:'发布时间',
 		        	  sortable:true,
-		        	  width:50,
+		        	  width:100,
 		        	  editor:{
 							type:'datetimebox',
 							options:{
@@ -180,7 +180,7 @@ $(function(){
 		        	  field:'endtime',
 		        	  title:'截止时间',
 		        	  sortable:true,
-		        	  width:50,
+		        	  width:100,
 		        	  editor:{
 							type:'datetimebox',
 							options:{

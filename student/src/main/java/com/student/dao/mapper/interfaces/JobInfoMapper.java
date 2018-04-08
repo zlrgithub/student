@@ -2,6 +2,7 @@ package com.student.dao.mapper.interfaces;
 
 import com.student.dao.mapper.bo.JobInfo;
 import com.student.dao.mapper.bo.JobInfoExample;
+
 import java.util.List;
 import java.util.Map;
 
@@ -33,4 +34,9 @@ public interface JobInfoMapper {
 	List<JobInfo> selectByPage(Map<String, Object> map);
 
 	List<JobInfo> selectByPageAndJobName(Map<String, Object> map);
+
+	List<JobInfo> selectBusiInfoByPage(Map<String, Object> map);
+
+	List<JobInfo> selectJobInfoBypage(Map<String, Object> map);
+	
 }
