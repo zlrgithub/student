@@ -1,8 +1,12 @@
 //前十专业
 function topTenJobDeal(jsonObj){
 	var topTenJob = new Array();
-	for(var i = 0 ; i < jsonObj.topTenJob.length ;i++ ){
-		topTenJob.push({name:jsonObj.topTenJob[jsonObj.topTenJob.length-1-i].factor,value:jsonObj.topTenJob[jsonObj.topTenJob.length-1-i].number});
+	if( jsonObj.topTenJob.length>0 ){
+		for(var i = 0 ; i < jsonObj.topTenJob.length ;i++ ){
+			topTenJob.push({name:jsonObj.topTenJob[jsonObj.topTenJob.length-1-i].factor,value:jsonObj.topTenJob[jsonObj.topTenJob.length-1-i].number});
+		}
+	}else{
+		topTenJob.push({name:'null',value:null});
 	}
 	return topTenJob;
 }
@@ -142,24 +146,32 @@ function successiveGraduationDeal(jsonObj){
 	var year = new Array();
 	var number = new Array();
 	var now = new Date(); 
-    for(var i = 0 ; i < 5 ; i++ ){
-    	var newYear = now.getFullYear()-4+i;
-    	var count = 0;
-    	for(var j = 0 ; j < jsonObj.successiveGraduation.length ; j++){
-    		if( jsonObj.successiveGraduation[j].year == newYear ){
-    			year.push(jsonObj.successiveGraduation[j].year);
-    			number.push(jsonObj.successiveGraduation[j].number);
-    			break;
-    		}else{
-    			count++;
-    			if(count == jsonObj.successiveGraduation.length){
-    				year.push(newYear);
-        			number.push(0);
-    			}
-    			continue;
-    		}
+	if( jsonObj.successiveGraduation.length > 0 ){
+	    for(var i = 0 ; i < 5 ; i++ ){
+	    	var newYear = now.getFullYear()-4+i;
+	    	var count = 0;
+	    	for(var j = 0 ; j < jsonObj.successiveGraduation.length ; j++){
+	    		if( jsonObj.successiveGraduation[j].year == newYear ){
+	    			year.push(jsonObj.successiveGraduation[j].year);
+	    			number.push(jsonObj.successiveGraduation[j].number);
+	    			break;
+	    		}else{
+	    			count++;
+	    			if(count == jsonObj.successiveGraduation.length){
+	    				year.push(newYear);
+	        			number.push(0);
+	    			}
+	    			continue;
+	    		}
+	    	}
+		}
+    }else{
+    	for(var i = 0 ; i < 5 ; i++ ){
+    		var newYear = now.getFullYear()-4+i;
+    		year.push(newYear);
+			number.push(0);
     	}
-	}
+    }
 	successiveGraduation.push(year);
 	successiveGraduation.push(number);
 	return successiveGraduation;
@@ -205,22 +217,30 @@ function threeTypeChangeDeal(jsonObj){
 		var year = new Array();
 		var number = new Array();
 		var now = new Date();
-		for(var i = 0 ; i < 5 ; i++ ){
-			var newYear = now.getFullYear()-4+i;
-	    	var count = 0;
-			for( var j = 0 ; j < jsonObj.threeTypeChange[k].length ; j++ ){
-				if(jsonObj.threeTypeChange[k][j].year == newYear){
-					year.push(jsonObj.threeTypeChange[k][j].year);
-					number.push(jsonObj.threeTypeChange[k][j].number);
-					break;
-				}else{
-					count++;
-					if(count == jsonObj.threeTypeChange[k].length){
-						year.push(newYear);
-						number.push(0)
+		if(jsonObj.threeTypeChange[k].length>0){
+			for(var i = 0 ; i < 5 ; i++ ){
+				var newYear = now.getFullYear()-4+i;
+		    	var count = 0;
+				for( var j = 0 ; j < jsonObj.threeTypeChange[k].length ; j++ ){
+					if(jsonObj.threeTypeChange[k][j].year == newYear){
+						year.push(jsonObj.threeTypeChange[k][j].year);
+						number.push(jsonObj.threeTypeChange[k][j].number);
+						break;
+					}else{
+						count++;
+						if(count == jsonObj.threeTypeChange[k].length){
+							year.push(newYear);
+							number.push(0)
+						}
+						continue;
 					}
-					continue;
 				}
+			}
+		}else{
+			for(var i = 0 ; i < 5 ; i++ ){
+				var newYear = now.getFullYear()-4+i;
+				year.push(newYear);
+				number.push(0)
 			}
 		}
 		threeTypeChange.push(year);
@@ -404,23 +424,31 @@ function majorJobRateDeal(jsonObj){
 	var year = new Array();
 	var number = new Array();
 	var now = new Date(); 
-    for(var i = 0 ; i < 5 ; i++ ){
-    	var newYear = now.getFullYear()-4+i;
-    	var count = 0;
-    	for(var j = 0 ; j < jsonObj.isMajorJob.length ; j++){
-    		if( jsonObj.isMajorJob[j].year == newYear ){
-    			year.push(jsonObj.isMajorJob[j].year);
-    			number.push(jsonObj.isMajorJob[j].number);
-    			break;
-    		}else{
-    			count++;
-    			if(count == jsonObj.isMajorJob.length){
-    				year.push(newYear);
-        			number.push(0);
-    			}
-    			continue;
-    		}
-    	}
+	if(jsonObj.isMajorJob.length>0){
+	    for(var i = 0 ; i < 5 ; i++ ){
+	    	var newYear = now.getFullYear()-4+i;
+	    	var count = 0;
+	    	for(var j = 0 ; j < jsonObj.isMajorJob.length ; j++){
+	    		if( jsonObj.isMajorJob[j].year == newYear ){
+	    			year.push(jsonObj.isMajorJob[j].year);
+	    			number.push(jsonObj.isMajorJob[j].number);
+	    			break;
+	    		}else{
+	    			count++;
+	    			if(count == jsonObj.isMajorJob.length){
+	    				year.push(newYear);
+	        			number.push(0);
+	    			}
+	    			continue;
+	    		}
+	    	}
+		}
+	}else{
+		for(var i = 0 ; i < 5 ; i++ ){
+			var newYear = now.getFullYear()-4+i;
+			year.push(newYear);
+			number.push(0);
+		}
 	}
     majorJobRate.push(year);
     majorJobRate.push(number);
@@ -464,23 +492,31 @@ function trainAndJobDeal(jsonObj){
 	var trainAndJob = new Array();
 	var year = new Array();
 	var number = new Array();
-    for(var i = 0 ; i < 12 ; i++ ){
-    	var newMonth = 12-11+i;
-    	var count = 0;
-    	for(var j = 0 ; j < jsonObj.trainAndJob.length ; j++){
-    		if( jsonObj.trainAndJob[j].factor == newMonth ){
-    			year.push(jsonObj.trainAndJob[j].factor+"个月");
-    			number.push({name:jsonObj.trainAndJob[j].factor+"个月",value:jsonObj.trainAndJob[j].number});
-    			break;
-    		}else{
-    			count++;
-    			if(count == jsonObj.trainAndJob.length){
-    				year.push(newMonth+"个月");
-    				//number.push({name:newMonth+"月",value:0})
-    			}
-    			continue;
-    		}
-    	}
+	if(jsonObj.trainAndJob.length>0){
+		for(var i = 0 ; i < 12 ; i++ ){
+	    	var newMonth = 12-11+i;
+	    	var count = 0;
+	    	for(var j = 0 ; j < jsonObj.trainAndJob.length ; j++){
+	    		if( jsonObj.trainAndJob[j].factor == newMonth ){
+	    			year.push(jsonObj.trainAndJob[j].factor+"个月");
+	    			number.push({name:jsonObj.trainAndJob[j].factor+"个月",value:jsonObj.trainAndJob[j].number});
+	    			break;
+	    		}else{
+	    			count++;
+	    			if(count == jsonObj.trainAndJob.length){
+	    				year.push(newMonth+"个月");
+	    				//number.push({name:newMonth+"月",value:0})
+	    			}
+	    			continue;
+	    		}
+	    	}
+		}
+	}else{
+		for(var i = 0 ; i < 12 ; i++ ){
+	    	var newMonth = 12-11+i;
+	    	year.push(newMonth+"个月");
+	    	number.push({name:newMonth+"月",value:0})
+	    }
 	}
     trainAndJob.push(year);
     trainAndJob.push(number);
