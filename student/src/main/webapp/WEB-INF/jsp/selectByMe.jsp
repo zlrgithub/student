@@ -23,7 +23,6 @@
 <h5 style="color: black;">请选择查询条件</h5>
 <div style="width: 98%;height: 100px;padding-left: 20px;float: left;">
 	<form>
-		<input type="reset" value="重置查询条件" onclick="resets()"><br>
 		<label for="gradTime">毕业年份：</label>
 		<input type="text" id = "gradTime" onchange="selectList(this)">
 		
@@ -86,6 +85,7 @@
 		
 		<label for ="salary">薪资范围：</label>
 		<input type="text" id = "salary1" onchange="selectList(this)" />--<input type="text" id = "salary2" onchange="selectList(this)" />
+		<input type="reset" value="重置查询条件" onclick="resets()">
 	</form>
 </div>
 <div style="width: 98%;height: 290px;float: left;" id = "showView">

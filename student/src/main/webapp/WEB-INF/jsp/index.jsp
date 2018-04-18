@@ -22,6 +22,7 @@
             <select name = 'roleType' id="roleType">
 				<option value = "学生">学生</option>
 				<option value = "企业人员">企业人员</option>
+				<option value = "管理员">管理员</option>
 			</select>
             <button type="submit">Sign In</button>
             <button type="button" onclick="register()">Regist</button>

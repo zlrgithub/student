@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.student.dao.mapper.bo.Administrator;
+import com.student.dao.mapper.bo.AdministratorExample;
 import com.student.dao.mapper.bo.BusiUserMessage;
 import com.student.dao.mapper.bo.BusiUserMessageExample;
 import com.student.dao.mapper.bo.SchoolInfo;
@@ -29,6 +31,7 @@ import com.student.dao.mapper.bo.UserMessage;
 import com.student.dao.mapper.bo.UserMessageExample;
 import com.student.dao.mapper.bo.businessUser;
 import com.student.dao.mapper.bo.businessUserExample;
+import com.student.dao.mapper.interfaces.AdministratorMapper;
 import com.student.dao.mapper.interfaces.BusiUserMessageMapper;
 import com.student.dao.mapper.interfaces.businessUserMapper;
 import com.student.service.interfaces.ISchool;
@@ -47,6 +50,9 @@ public class UserController {
 	
 	@Autowired
 	private businessUserMapper businessUserMapper ;
+	
+	@Autowired
+	private AdministratorMapper administratorMapper;
 	
 	@Autowired
 	private BusiUserMessageMapper busiUserMessageMapper ;
@@ -82,6 +88,19 @@ public class UserController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+    	}else if("管理员".equals(roleType)){
+    		Administrator administrator = new Administrator();
+    		administrator.setUserId(name);
+    		administrator.setUserName(name);
+    		administrator.setPassword(password);
+    		administrator.setIsOff(0);
+    		administrator.setCreateDate(dateFormat.format(date));
+    		administratorMapper.insert(administrator);
+    		try {
+				response.sendRedirect("http://localhost:8080/student/");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
     	}else{
     		businessUser user = new businessUser();
 	    	user.setUserId(name);
@@ -109,6 +128,18 @@ public class UserController {
 	    	user.setPassword(password);
 	    	List<User> isOk = userInsert.login(user);
 	    	if( !isOk.isEmpty()){
+	    		HttpSession session = request.getSession();
+	        	session.setAttribute("name", name);
+	        	session.setAttribute("roleType", roleType);
+	    		return "main";
+	    	}else{
+	    		return "register";
+	    	}
+    	}else if("管理员".equals(roleType)){
+    		AdministratorExample example = new AdministratorExample();
+    		example.createCriteria().andUserIdEqualTo(name).andPasswordEqualTo(password);
+    		List<Administrator> isOk = administratorMapper.selectByExample(example);
+    		if( !isOk.isEmpty()){
 	    		HttpSession session = request.getSession();
 	        	session.setAttribute("name", name);
 	        	session.setAttribute("roleType", roleType);

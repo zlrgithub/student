@@ -26,51 +26,41 @@
 		<br><br>
 		<div align="left" style="width: 100%;height:400px; ;float: left;">
 
-			<div style="float: left;width: 55%;" align="right">
+			<div style="float: left;width: 70%;" align="center">
 				<table class="tables">
 						<tr>
 							<td>账号：</td>
 							<td id="tb1"></td>
-						</tr>
-						<tr>
 							<td>姓名：</td>
 							<td id="tb2"></td>
 						</tr>
 						<tr>
 							<td>职位：</td>
 							<td id="tb3"></td>
-						</tr>
-						<tr>
 							<td>部门：</td>
 							<td id="tb4"></td>
 						</tr>
 						<tr>
 							<td>电话：</td>
 							<td id="tb5"></td>
-						</tr>
-						<tr>
 							<td>Email：</td>
 							<td id="tb6"></td>
 						</tr>
 						<tr>
 							<td>公司名称：</td>
 							<td id="tb7"></td>
-						</tr>
-						<tr>
 							<td>公司类型：</td>
 							<td id="tb8"></td>
 						</tr>
 						<tr>
 							<td>公司地址：</td>
 							<td id="tb9"></td>
-						</tr>
-						<tr>
 							<td>公司网站：</td>
 							<td id="tb11"></td>
 						</tr>
 						<tr>
-							<td>公司简介：</td>
-							<td id="tb10"></td>
+							<td >公司简介：</td>
+							<td colspan="3"id="tb10"></td>
 						</tr>
 				</table>
 			</div>

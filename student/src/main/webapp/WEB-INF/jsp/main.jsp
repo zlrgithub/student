@@ -24,29 +24,32 @@ String roleType = httpSession.getAttribute("roleType").toString();
 	<div class="easyui-layout" style="width:100%;height:645px;">
 		<div id = "div1" region="north">
 			<h1>毕业生就业信息查询系统</h1>
+			<div align="right" style="width: 98%">
+				<a href='http://localhost:8080/student'>退出系统</a>
+			</div>
 		</div>
 		<div id  ="div2" region="west" split="true" title="菜单">
 			<!-- <p style="padding:5px;margin:0;"><font>Select Item:</font></p> -->
-			<ul>
-				<li><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/user/showMe')">
+			<ul id = "menulist">
+				<!-- <li id="userInfo" style="display: none"><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/user/showMe')">
 					<font>用户信息</font></a></li><br>
-				<li><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/showMessage/showMain')">
+				<li id="studentInfo" style="display: none"><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/showMessage/showMain')">
 					<font>就业生数据</font></a></li><br>
-				<li><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/showMessage/selectByMe')">
+				<li id="selectInfo" style="display: none"><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/showMessage/selectByMe')">
 					<font>自定义查询</font></a></li><br>
-				<li><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/jobMsgController/jobInfo')">
+				<li id="selectJobInfo" style="display: none"><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/jobMsgController/jobInfo')">
 					<font>招聘信息查询</font></a></li><br>
 				<li id = "jobInfo" style="display: none"><a href="javascript:void(0)" onclick="change('http://localhost:8080/student/showMessage/releaseJobInfo')">
-					<font>发布招聘信息</font></a></li><br>
+					<font>发布招聘信息</font></a></li><br>-->
 			</ul>
 		</div>
 		<div id="content" region="center" title=" ">
-			<!-- <iframe id = "showView" src ='http://localhost:8080/student/showMessage/showMain' 
-				style="width: 98%;height: 98%;border: 0px;">
-			</iframe> -->
-			<iframe id = "showView" src ='http://localhost:8080/student/jobMsgController/jobInfo' 
+			<iframe id = "showView" src ='http://localhost:8080/student/showMessage/showMain' 
 				style="width: 98%;height: 98%;border: 0px;">
 			</iframe>
+			<!-- <iframe id = "showView" src ='http://localhost:8080/student/jobMsgController/jobInfo' 
+				style="width: 98%;height: 98%;border: 0px;">
+			</iframe> -->
 		</div>
 	</div>
 </body>

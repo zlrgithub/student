@@ -17,11 +17,11 @@
 	<div style="position:absolute; width: 99%; height: 98%;text-align: center;">
 	<form id="ff" action="./regeist" method="post">
 		<table>
-			<tr>
+			<!-- <tr>
 				<td colspan="2" style="red;padding-left: 100px">
 					<h1>用户注册</h1>
 				</td>
-			</tr>
+			</tr> -->
 			<tr>
 				<td></td>
 			</tr>
@@ -34,7 +34,7 @@
 				<td><input name="password" type="text"></input></td>
 			</tr>
 			<tr>
-				<td class = "td">确认密码:</td>
+				<td class = "td">确认密码：</td>
 				<td><input name="password2" type="text"></input></td>
 			</tr>
 			<tr>
@@ -43,16 +43,15 @@
 					<select name = 'roleType' id="roleType">
 						<option value = "学生">学生</option>
 						<option value = "企业人员">企业人员</option>
+						<option value = "管理员">管理员</option>
 					</select>
 				</td>
 			</tr>
-			<tr>
-				<td colspan="2" style="padding-left: 100px">
-					<button id = "cancel" type="reset" onclick="turnback()">返回</button>
-					<button type="submit">注册</button>
-				</td>
-			</tr>
 		</table>
+		<div style="padding-left: 10px">
+			<button type="submit">注册</button>
+			<button id = "cancel" type="reset" onclick="turnback()">返回</button>
+		</div>
 	</div>
 </body>
 </html>

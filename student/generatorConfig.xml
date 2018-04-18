@@ -84,10 +84,15 @@
 		enableDeleteByExample="true" enableSelectByExample="true"
 		selectByExampleQueryId="false" 
 		domainObjectName="BusiUserMessage" /> -->
-	<table tableName="jobinfo"
+	<!-- <table tableName="jobinfo"
 		enableCountByExample="true" enableUpdateByExample="true"
 		enableDeleteByExample="true" enableSelectByExample="true"
 		selectByExampleQueryId="false" 
-		domainObjectName="JobInfo" />
+		domainObjectName="JobInfo" /> -->
+	<table tableName="administrator"
+		enableCountByExample="true" enableUpdateByExample="true"
+		enableDeleteByExample="true" enableSelectByExample="true"
+		selectByExampleQueryId="false" 
+		domainObjectName="Administrator" />
   </context>
 </generatorConfiguration>
