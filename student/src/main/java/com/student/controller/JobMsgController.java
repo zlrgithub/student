@@ -10,7 +10,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,13 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.student.dao.mapper.bo.JobInfo;
 import com.student.dao.mapper.bo.JobInfoExample;
 import com.student.dao.mapper.interfaces.JobInfoMapper;
 import com.student.service.interfaces.IJobInfo;
-
-import sun.util.logging.resources.logging;
 
 @Controller
 @RequestMapping(value = "/jobMsgController")
@@ -50,8 +46,8 @@ public class JobMsgController {
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		String now = dateFormat.format(date).toString();
 		List<JobInfo> jobInfos = iJobInfo.selectBusiInfoByPage(proview,next,now);
-		logger.info(""+JSONObject.parse(JSON.toJSONString(jobInfos)));
-		return JSONObject.parse(JSON.toJSONString(jobInfos));
+		logger.info(""+JSON.parse(JSON.toJSONString(jobInfos)));
+		return JSON.parse(JSON.toJSONString(jobInfos));
 	}
 	
 	@RequestMapping(value="/showJobInfoTotal.do",method=RequestMethod.POST)
@@ -71,8 +67,8 @@ public class JobMsgController {
 		Map<String, Long> map = new HashMap<>();
 		map.put("total", total);
 		map.put("page", page);
-		logger.info(""+JSONObject.parse(JSON.toJSONString(map)));
-		return JSONObject.parse(JSON.toJSONString(map));
+		logger.info(""+JSON.parse(JSON.toJSONString(map)));
+		return JSON.parse(JSON.toJSONString(map));
 	}
 	
 	@RequestMapping(value="/showJobInfo.do",method=RequestMethod.POST)
@@ -86,7 +82,7 @@ public class JobMsgController {
 		String now = format.format(date);
 		List<JobInfo> infos = iJobInfo.selectJobInfoBypage(now,low,height);
 		
-		logger.info("low:"+low+"height:"+height+""+JSONObject.parse(JSON.toJSONString(infos)));
-		return JSONObject.parse(JSON.toJSONString(infos));
+		logger.info("low:"+low+"height:"+height+""+JSON.parse(JSON.toJSONString(infos)));
+		return JSON.parse(JSON.toJSONString(infos));
 	}
 }
