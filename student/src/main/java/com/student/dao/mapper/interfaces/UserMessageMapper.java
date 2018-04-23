@@ -40,4 +40,9 @@ public interface UserMessageMapper {
 	List<CityInfo> selectTopTenJob(Map<String, String> param);
 
 	Long countBySelectByMe(Map<String, String> example);
+
+	List<UserMessage> selectByPage(Map<String, Integer> map);
+
+	List<UserMessage> selectByPageAndUserId(Map<String, Object> map);
+
 }

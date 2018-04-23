@@ -1,5 +1,6 @@
 package com.student.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -60,6 +61,21 @@ public class UserMessageImpl implements IUserMessage{
 	@Override
 	public Long countBySelectByMe(Map<String, String> example) {
 		return userMessageMapper.countBySelectByMe(example);
+	}
+	@Override
+	public List<UserMessage> selectByPage(int i, int j) {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("low", i);
+		map.put("height", j);
+		return userMessageMapper.selectByPage(map);
+	}
+	@Override
+	public List<UserMessage> selectByPageAndUserId(int i, int j, String string) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("low", i);
+		map.put("height", j);
+		map.put("userId", string);
+		return userMessageMapper.selectByPageAndUserId(map);
 	}
 	
 }

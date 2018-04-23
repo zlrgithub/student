@@ -31,4 +31,8 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
 	List<User> login(Map<String, String> param);
+
+	List<User> selectByPage(Map<String, Integer> map);
+
+	List<User> selectByPageAndUserId(Map<String, Object> map);
 }

@@ -1,8 +1,11 @@
 package com.student.dao.mapper.interfaces;
 
+import com.student.dao.mapper.bo.User;
 import com.student.dao.mapper.bo.businessUser;
 import com.student.dao.mapper.bo.businessUserExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface businessUserMapper {
@@ -27,4 +30,8 @@ public interface businessUserMapper {
     int updateByPrimaryKeySelective(businessUser record);
 
     int updateByPrimaryKey(businessUser record);
+
+	List<businessUser> selectByPage(Map<String, Integer> map);
+
+	List<businessUser> selectByPageAndUserId(Map<String, Object> map);
 }

@@ -321,4 +321,15 @@
       company_web = #{companyWeb,jdbcType=VARCHAR}
     where busi_user_id = #{busiUserId,jdbcType=VARCHAR}
   </update>
+  
+  
+  
+  
+  <select id = "selectByPage" parameterType = "map" resultMap="BaseResultMap" >
+  	select * from busi_user_message where busi_user_id is not null limit #{low,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}
+  </select>
+  
+  <select id = "selectByPageAndUserId" parameterType = "map" resultMap="BaseResultMap" >
+  	select * from busi_user_message where busi_user_id like #{userId,jdbcType=VARCHAR} limit #{low,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}
+  </select>
 </mapper>

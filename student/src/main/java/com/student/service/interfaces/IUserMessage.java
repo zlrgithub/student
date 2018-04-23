@@ -18,4 +18,6 @@ public interface IUserMessage {
 	List<CityInfo> selectTrainAndJob(Map<String, String> param);
 	List<CityInfo> selectTopTenJob(Map<String, String> param);
 	Long countBySelectByMe(Map<String, String> example);
+	List<UserMessage> selectByPage(int i, int j);
+	List<UserMessage> selectByPageAndUserId(int i, int j, String string);
 }

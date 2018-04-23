@@ -15,7 +15,7 @@
 </head>
 <body>
  	<div class="page-container">
-    	<h1>就业信息系统</h1>
+    	<img src="image/index/index3.png" />
         <form action="./user/login" method="post">
         	<input type="text" name="name" placeholder="Username"  onchange="pass()">
             <input id="password" type="text" name="password" placeholder="Password">

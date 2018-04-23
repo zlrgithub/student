@@ -11,3 +11,19 @@ label {
 	width: 300px;
 	color: black;
 }
+h2 {
+	color: gray;
+}
+h5 {
+	color: gray;
+}
+table {
+	border-color: rgb(255,127,80);
+}
+td {
+	height: 30px;
+	border-color:rgb(255,127,80);
+	vertical-align: middle;
+	border-bottom-color: rgb(255,127,80);
+	border-top-color: rgb(255,127,80);
+}

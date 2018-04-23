@@ -3,6 +3,8 @@ package com.student.dao.mapper.interfaces;
 import com.student.dao.mapper.bo.BusiUserMessage;
 import com.student.dao.mapper.bo.BusiUserMessageExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface BusiUserMessageMapper {
@@ -27,4 +29,8 @@ public interface BusiUserMessageMapper {
     int updateByPrimaryKeySelective(BusiUserMessage record);
 
     int updateByPrimaryKey(BusiUserMessage record);
+
+	List<BusiUserMessage> selectByPage(Map<String, Integer> map);
+
+	List<BusiUserMessage> selectByPageAndUserId(Map<String, Object> map);
 }

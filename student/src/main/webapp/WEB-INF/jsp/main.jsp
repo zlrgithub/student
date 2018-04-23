@@ -23,9 +23,9 @@ String roleType = httpSession.getAttribute("roleType").toString();
 
 	<div class="easyui-layout" style="width:100%;height:645px;">
 		<div id = "div1" region="north">
-			<h1>毕业生就业信息查询系统</h1>
+			<img src="./../image/index/index2.png"/>
 			<div align="right" style="width: 98%">
-				<a href='http://localhost:8080/student'>退出系统</a>
+				<a href='http://localhost:8080/student'>【退出系统】</a>
 			</div>
 		</div>
 		<div id  ="div2" region="west" split="true" title="菜单">

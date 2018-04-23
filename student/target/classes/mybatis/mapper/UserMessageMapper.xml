@@ -491,5 +491,12 @@
   	${salary2}
   	
   </select>
+  <select id="selectByPage" parameterType="map" resultMap="BaseResultMap">
+  	select * from user_message where student_id is not null limit #{low,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByPageAndUserId" parameterType="map" resultMap="BaseResultMap">
+  	select * from user_message where student_id like #{userId,jdbcType=VARCHAR} limit #{low,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}
+  </select>
   
 </mapper>

@@ -117,11 +117,11 @@ function getInfo(selectName){
 			value = jsonObj.perCount.value;
 			value2 = jsonObj.perCount2.value;
 			if(count == 0){
-				var tr1 = $("<tr id = 'name'><th width='120px;'hight='60px;'>查询条件：</th></tr>");
-				var tr2 = $("<tr id = 'info'><th width='120px;'hight='60px;'>符合条件人数：</th></tr>");
-				var tr3 = $("<tr id = 'other'><th width='120px;'hight='60px;'>不符合条件人数：</th></tr>");
-				var tr4 = $("<tr id = 'prop'><th width='120px;'hight='60px;'>该条件下占比：</th></tr>");
-				var tr5 = $("<tr id = 'propAll'><th width='120px;'hight='60px;'>总人数占比：</th></tr>")
+				var tr1 = $("<tr id = 'name'><td>查询条件：</td></tr>");
+				var tr2 = $("<tr id = 'info'><td>符合条件人数：</td></tr>");
+				var tr3 = $("<tr id = 'other'><td>不符合条件人数：</td></tr>");
+				var tr4 = $("<tr id = 'prop'><td>该条件下占比：</td></tr>");
+				var tr5 = $("<tr id = 'propAll'><td>总人数占比：</td></tr>")
 				$("#dg").append(tr1);
 				$("#dg").append(tr2);
 				$("#dg").append(tr3);
@@ -156,11 +156,11 @@ function showInTable(name,value,value2,count){
 	var propAll = value/count;
 	propAll=propAll+' ';
 	var ss = propAll.substring(0, 4);
-	var th1 = $("<th width='120px;'hight='50px;'>"+name+"</th>");
-	var th2 = $("<th width='120px;'hight='50px;'>"+value+"</th>");
-	var th3 = $("<th width='120px;'hight='50px;'>"+value2+"</th>");
-	var th4 = $("<th width='120px;'hight='50px;'>"+Number(s)*100+"%</th>");
-	var th5 = $("<th width='120px;'hight='50px;'>"+Number(ss)*100+"%</th>");
+	var th1 = $("<td width='120px;'hight='50px;'>"+name+"</td>");
+	var th2 = $("<td width='120px;'hight='50px;'>"+value+"</td>");
+	var th3 = $("<td width='120px;'hight='50px;'>"+value2+"</td>");
+	var th4 = $("<td width='120px;'hight='50px;'>"+Number(s)*100+"%</td>");
+	var th5 = $("<td width='120px;'hight='50px;'>"+Number(ss)*100+"%</td>");
 	$("#name").append(th1);
 	$("#info").append(th2);
 	$("#other").append(th3);

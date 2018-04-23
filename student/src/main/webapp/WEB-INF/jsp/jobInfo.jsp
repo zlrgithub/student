@@ -22,8 +22,8 @@
 </head>
 <body onload="a();c()">
 	<!-- <h2>2018年大学生招聘信息</h2> -->
-	<div style="margin:20px 0;"></div>
-	<div style="width:100%;height:950px;background-color: white;">
+	<div style="margin:30px 0;"></div>
+	<div style="width:100%;height:930px;background-color: white;">
 		<div style="width: 30%;height:800px;float: left;">
 			<div style="width: 100%;height: 40%;">
 				<!-- <div style="width: 100%;height: 10%;float: left;padding-top: 10px;" align="center">

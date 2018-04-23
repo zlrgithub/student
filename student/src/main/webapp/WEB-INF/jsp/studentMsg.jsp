@@ -5,6 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+	<link rel="stylesheet" href="./../js/jquery-easyui-1.5.4/themes/default/easyui.css" type="text/css" />
+	<link rel="stylesheet" href="./../js/jquery-easyui-1.5.4/themes/icon.css" type="text/css" />
+	<link rel="stylesheet" href="./../js/jquery-easyui-1.5.4/demo/demo.css" />
+	<script type="text/javascript" src="./../js/jquery-easyui-1.5.4/jquery.min.js"></script>
+	<script type="text/javascript" src="./../js/jquery-easyui-1.5.4/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="./../js/jquery-easyui-1.5.4/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="./../js/jquery-easyui-1.5.4/datagrid-detailview.js"></script>
+	<script type="text/javascript" src="./../js/myJS/studentMsg.js"></script>
 </head>
 <body>
 <table id="dg" class="easyui-datagrid"></table>

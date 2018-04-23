@@ -28,14 +28,28 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.student.dao.mapper.interfaces.BusiUserMessageMapper;
 import com.student.dao.mapper.interfaces.JobInfoMapper;
+import com.student.dao.mapper.interfaces.UserMapper;
+import com.student.dao.mapper.interfaces.UserMessageMapper;
+import com.student.dao.mapper.interfaces.businessUserMapper;
+import com.student.dao.mapper.bo.BusiUserMessage;
+import com.student.dao.mapper.bo.BusiUserMessageExample;
 import com.student.dao.mapper.bo.JobInfo;
 import com.student.dao.mapper.bo.JobInfoExample;
 import com.student.dao.mapper.bo.SchoolInfo;
+import com.student.dao.mapper.bo.User;
+import com.student.dao.mapper.bo.UserExample;
+import com.student.dao.mapper.bo.UserMessage;
 import com.student.dao.mapper.bo.UserMessageExample;
+import com.student.dao.mapper.bo.businessUser;
+import com.student.dao.mapper.bo.businessUserExample;
+import com.student.service.interfaces.IBusiMsg;
+import com.student.service.interfaces.IBusiUser;
 import com.student.service.interfaces.IJobInfo;
 import com.student.service.interfaces.ISchool;
 import com.student.service.interfaces.IUserMessage;
+import com.student.service.interfaces.UserInsert;
 import com.student.until.CityInfo;
 import com.student.until.WorkInfoMap;
 
@@ -46,10 +60,22 @@ public class ShowMsgController {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private IUserMessage iUserMessage;
-	
+	@Autowired
+	private UserMessageMapper userMessageMapper;
+	@Autowired
+	private UserInsert userInsert;
+	@Autowired
+	private UserMapper userMapper;
 	@Autowired
 	private ISchool iSchool;
-	
+	@Autowired
+	IBusiUser iBusiUser;
+	@Autowired
+	businessUserMapper businessUserMapper;
+	@Autowired
+	IBusiMsg iBusiMsg;
+	@Autowired
+	BusiUserMessageMapper busiUserMessageMapper;
 	@Autowired
 	private IJobInfo iJobInfo;
 	
@@ -559,6 +585,216 @@ public class ShowMsgController {
     			JobInfoExample example = new JobInfoExample();
         		example.createCriteria().andJobIdEqualTo(info.getJobId());
         		jobInfoMapper.deleteByExample(example);
+        	}
+    	}
+    	return "success";
+    }
+    
+    
+    @RequestMapping(value="/studentMsg")
+    public String studentMsg(){
+    	return "studentMsg";
+    }
+    @RequestMapping(value="/studentAccount")
+    public String studentAccount(){
+    	return "studentAccount";
+    }
+    @RequestMapping(value="/busiMsg")
+    public String busiMsg(){
+    	return "busiMsg";
+    }
+    @RequestMapping(value="/busiAccount")
+    public String busiAccount(){
+    	return "busiAccount";
+    }
+    @RequestMapping(value="/jobMsg")
+    public String jobMsg(){
+    	return "jobMsg";
+    }
+    
+    @RequestMapping(value = "/studentMsgGet.do",method=RequestMethod.POST)
+    public @ResponseBody Object studentMsgGet(HttpServletRequest request,
+    		HttpServletResponse response,int page,int rows,String uid) throws ParseException {
+    	Map<String,Object> map = new HashMap<>();
+    	if( null == uid ){
+    		List<User> releaseJobInfos = userInsert.selectByPage((page-1)*rows,page*rows);
+	    	UserExample example = new UserExample();
+	    	example.createCriteria().andUserIdIsNotNull();
+	    	Long total = userMapper.countByExample(example);
+	    	map.put("total", total);
+	    	map.put("rows", JSON.toJSON(releaseJobInfos));
+    	}else{
+    		List<User> releaseJobInfos = userInsert.selectByPageAndUserId((page-1)*rows,page*rows,"%"+uid+"%");
+    		UserExample example = new UserExample();
+	    	example.createCriteria().andUserIdIsNotNull().andUserIdLike("%"+uid+"%");
+	    	Long total = userMapper.countByExample(example);
+	    	map.put("total", total);
+	    	map.put("rows", JSON.toJSON(releaseJobInfos));
+    	}
+    	return JSON.parse(JSON.toJSONString(map));
+    }
+    
+    @RequestMapping(value = "/studentMsgGet2.do",method=RequestMethod.POST)
+    public @ResponseBody Object studentMsgGet2(HttpServletRequest request) throws ParseException {
+
+    	Gson gson = new Gson();
+    	User jobInfo = gson.fromJson( request.getParameter("itemInfo"), User.class);
+    	logger.info("showMsgController JobInfo"+request.getParameter("itemInfo"));
+    	if( null != jobInfo ){
+    		if( null != jobInfo.getUserId() ){
+    			userMapper.updateByPrimaryKey(jobInfo);
+    		}else{
+    			jobInfo.setUserId(jobInfo.getUserName());
+    			userMapper.insert(jobInfo);
+    		}
+    	}
+    	List<User> jobInfo2 = gson.fromJson( request.getParameter("delItems"),new TypeToken<List<User>>(){}.getType());
+    	if( null != jobInfo2 && !jobInfo2.isEmpty() ){
+    		for( User info : jobInfo2 ){
+    			UserExample example = new UserExample();
+        		example.createCriteria().andUserIdEqualTo(info.getUserId());
+        		userMapper.deleteByExample(example);
+        	}
+    	}
+    	return "success";
+    }
+    
+    @RequestMapping(value = "/studentAccountGet.do",method=RequestMethod.POST)
+    public @ResponseBody Object studentAccountGet(HttpServletRequest request,
+    		HttpServletResponse response,int page,int rows,String uid) throws ParseException {
+    	Map<String,Object> map = new HashMap<>();
+    	if( null == uid ){
+    		List<UserMessage> releaseJobInfos = iUserMessage.selectByPage((page-1)*rows,page*rows);
+	    	UserMessageExample example = new UserMessageExample();
+	    	example.createCriteria().andUserIdIsNotNull();
+	    	Long total = userMessageMapper.countByExample(example);
+	    	map.put("total", total);
+	    	map.put("rows", JSON.toJSON(releaseJobInfos));
+    	}else{
+    		List<UserMessage> releaseJobInfos = iUserMessage.selectByPageAndUserId((page-1)*rows,page*rows,"%"+uid+"%");
+    		UserMessageExample example = new UserMessageExample();
+	    	example.createCriteria().andUserIdIsNotNull().andUserIdLike("%"+uid+"%");
+	    	Long total = userMessageMapper.countByExample(example);
+	    	map.put("total", total);
+	    	map.put("rows", JSON.toJSON(releaseJobInfos));
+    	}
+    	return JSON.parse(JSON.toJSONString(map));
+    }
+    
+    @RequestMapping(value = "/studentAccountGet2.do",method=RequestMethod.POST)
+    public @ResponseBody Object studentAccountGet2(HttpServletRequest request) throws ParseException {
+
+    	Gson gson = new Gson();
+    	UserMessage jobInfo = gson.fromJson( request.getParameter("itemInfo"), UserMessage.class);
+    	logger.info("showMsgController JobInfo"+request.getParameter("itemInfo"));
+    	if( null != jobInfo ){
+    		if( null != jobInfo.getStudentId() ){
+    			userMessageMapper.updateByPrimaryKey(jobInfo);
+    		}else{
+    			jobInfo.setStudentId(jobInfo.getUserId());
+    			userMessageMapper.insert(jobInfo);
+    		}
+    	}
+    	List<UserMessage> jobInfo2 = gson.fromJson( request.getParameter("delItems"),new TypeToken<List<UserMessage>>(){}.getType());
+    	if( null != jobInfo2 && !jobInfo2.isEmpty() ){
+    		for( UserMessage info : jobInfo2 ){
+    			UserMessageExample example = new UserMessageExample();
+        		example.createCriteria().andStudentIdEqualTo(info.getStudentId());
+        		userMessageMapper.deleteByExample(example);
+        	}
+    	}
+    	return "success";
+    }
+    
+    @RequestMapping(value = "/busiAccountGet.do",method=RequestMethod.POST)
+    public @ResponseBody Object busiAccountGet(HttpServletRequest request,
+    		HttpServletResponse response,int page,int rows,String uid) throws ParseException {
+    	Map<String,Object> map = new HashMap<>();
+    	if( null == uid ){
+    		List<businessUser> releaseJobInfos = iBusiUser.selectByPage((page-1)*rows,page*rows);
+    		businessUserExample example = new businessUserExample();
+	    	example.createCriteria().andUserIdIsNotNull();
+	    	Long total = businessUserMapper.countByExample(example);
+	    	map.put("total", total);
+	    	map.put("rows", JSON.toJSON(releaseJobInfos));
+    	}else{
+    		List<businessUser> releaseJobInfos = iBusiUser.selectByPageAndUserId((page-1)*rows,page*rows,"%"+uid+"%");
+    		businessUserExample example = new businessUserExample();
+	    	example.createCriteria().andUserIdIsNotNull().andUserIdLike("%"+uid+"%");
+	    	Long total = businessUserMapper.countByExample(example);
+	    	map.put("total", total);
+	    	map.put("rows", JSON.toJSON(releaseJobInfos));
+    	}
+    	return JSON.parse(JSON.toJSONString(map));
+    }
+    
+    @RequestMapping(value = "/busiAccountGet2.do",method=RequestMethod.POST)
+    public @ResponseBody Object busiAccountGet2(HttpServletRequest request) throws ParseException {
+
+    	Gson gson = new Gson();
+    	businessUser jobInfo = gson.fromJson( request.getParameter("itemInfo"), businessUser.class);
+    	logger.info("showMsgController JobInfo"+request.getParameter("itemInfo"));
+    	if( null != jobInfo ){
+    		if( null != jobInfo.getUserId() ){
+    			businessUserMapper.updateByPrimaryKey(jobInfo);
+    		}else{
+    			jobInfo.setUserId(jobInfo.getUserName());
+    			businessUserMapper.insert(jobInfo);
+    		}
+    	}
+    	List<businessUser> jobInfo2 = gson.fromJson( request.getParameter("delItems"),new TypeToken<List<businessUser>>(){}.getType());
+    	if( null != jobInfo2 && !jobInfo2.isEmpty() ){
+    		for( businessUser info : jobInfo2 ){
+    			businessUserExample example = new businessUserExample();
+        		example.createCriteria().andUserIdEqualTo(info.getUserId());
+        		businessUserMapper.deleteByExample(example);
+        	}
+    	}
+    	return "success";
+    }
+    
+    @RequestMapping(value = "/busiMsgGet.do",method=RequestMethod.POST)
+    public @ResponseBody Object busiMsgGet(HttpServletRequest request,
+    		HttpServletResponse response,int page,int rows,String uid) throws ParseException {
+    	Map<String,Object> map = new HashMap<>();
+    	if( null == uid ){
+    		List<BusiUserMessage> releaseJobInfos = iBusiMsg.selectByPage((page-1)*rows,page*rows);
+	    	BusiUserMessageExample example = new BusiUserMessageExample();
+	    	example.createCriteria().andBusiUserIdIsNotNull();
+	    	Long total = busiUserMessageMapper.countByExample(example);
+	    	map.put("total", total);
+	    	map.put("rows", JSON.toJSON(releaseJobInfos));
+    	}else{
+    		List<BusiUserMessage> releaseJobInfos = iBusiMsg.selectByPageAndUserId((page-1)*rows,page*rows,"%"+uid+"%");
+    		BusiUserMessageExample example = new BusiUserMessageExample();
+	    	example.createCriteria().andBusiUserIdIsNotNull().andUserIdLike("%"+uid+"%");
+	    	Long total = busiUserMessageMapper.countByExample(example);
+	    	map.put("total", total);
+	    	map.put("rows", JSON.toJSON(releaseJobInfos));
+    	}
+    	return JSON.parse(JSON.toJSONString(map));
+    }
+    
+    @RequestMapping(value = "/busiMsgGet2.do",method=RequestMethod.POST)
+    public @ResponseBody Object busiMsgGet2(HttpServletRequest request) throws ParseException {
+
+    	Gson gson = new Gson();
+    	BusiUserMessage jobInfo = gson.fromJson( request.getParameter("itemInfo"), BusiUserMessage.class);
+    	logger.info("showMsgController JobInfo"+request.getParameter("itemInfo"));
+    	if( null != jobInfo ){
+    		if( null != jobInfo.getBusiUserId() ){
+    			busiUserMessageMapper.updateByPrimaryKey(jobInfo);
+    		}else{
+    			jobInfo.setBusiUserId(jobInfo.getUserId());
+    			busiUserMessageMapper.insert(jobInfo);
+    		}
+    	}
+    	List<BusiUserMessage> jobInfo2 = gson.fromJson( request.getParameter("delItems"),new TypeToken<List<BusiUserMessage>>(){}.getType());
+    	if( null != jobInfo2 && !jobInfo2.isEmpty() ){
+    		for( BusiUserMessage info : jobInfo2 ){
+    			BusiUserMessageExample example = new BusiUserMessageExample();
+        		example.createCriteria().andBusiUserIdEqualTo(info.getBusiUserId());
+        		busiUserMessageMapper.deleteByExample(example);
         	}
     	}
     	return "success";
