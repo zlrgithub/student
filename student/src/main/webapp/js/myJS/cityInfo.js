@@ -370,7 +370,7 @@ function employmentRate(cityData){
 			    	boundaryGap : false,
 		            type : 'value',
 		            min: '0',
-		            max : '1'
+		            max : '100'
 		        }],
 		    series : [
 		        {
@@ -471,7 +471,9 @@ function majorJobRate(cityData){
                 name: "(年)"
 		    },
 		    yAxis: {
-		        type: 'value',
+		        /*type: 'value',*/
+		        min: '0',
+	            max : '100',
 		        name: "(100%)"
 		    },
 		    series: [{

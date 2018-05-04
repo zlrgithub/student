@@ -416,7 +416,7 @@
   		detail.sex AS factor,
   		CASE
    		WHEN total.num = 0 THEN 0 
-    		ELSE detail.num / total.num 
+    		ELSE round(detail.num / total.num,4)*100
   		END AS number 
 	FROM
 	  (SELECT 
@@ -448,6 +448,35 @@
 	    GROUP BY gra_time) total 
 	    ON detail.gra_time = total.gra_time
 	ORDER BY detail.gra_time,detail.sex
+  </select>
+  <select id="selectEmployRate2" parameterType="map" resultType="com.student.until.CityInfo">
+    SELECT 
+  		detail.gra_time AS YEAR,
+  		CASE
+   		WHEN total.num = 0 THEN 0 
+    		ELSE round(detail.num / total.num,4)*100
+  		END AS number 
+	FROM
+	  (SELECT 
+		gra_time,
+	    COUNT(1) AS num 
+	  FROM user_message 
+	  WHERE workspace = #{cityName,jdbcType=VARCHAR} 
+	    AND gra_time BETWEEN (#{year,jdbcType=VARCHAR}-5) AND #{year,jdbcType=VARCHAR}
+	    AND WORK NOT IN ('继续深造', '未确定') 
+	    ${noJobInfo}
+	  GROUP BY gra_time
+	   ) detail 
+	  LEFT JOIN 
+	    (SELECT 
+	      gra_time AS gra_time,
+	      COUNT(1) AS num 
+	    FROM user_message 
+	    WHERE workspace = #{cityName,jdbcType=VARCHAR} 
+	    AND WORK NOT IN ('继续深造', '未确定') 
+	    GROUP BY gra_time) total 
+	    ON detail.gra_time = total.gra_time
+	ORDER BY detail.gra_time
   </select>
   <select id="selectTrainAndJob" parameterType="map" resultType="com.student.until.CityInfo">
     SELECT

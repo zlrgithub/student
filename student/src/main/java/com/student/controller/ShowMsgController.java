@@ -157,7 +157,7 @@ public class ShowMsgController {
 		param.put("cityName", cityName);
 		param.put("year", year);
 		param.put("noJobInfo", "and is_major = 1 ");
-		List<CityInfo> isMajorJob = iUserMessage.selectEmployRate(param);
+		List<CityInfo> isMajorJob = iUserMessage.selectEmployRate2(param);
 		cityInfo.put("isMajorJob", isMajorJob);
 		//实习与就业关系
 		param = new HashMap<>();

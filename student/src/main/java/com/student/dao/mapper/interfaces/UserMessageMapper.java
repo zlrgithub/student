@@ -45,4 +45,6 @@ public interface UserMessageMapper {
 
 	List<UserMessage> selectByPageAndUserId(Map<String, Object> map);
 
+	List<CityInfo> selectEmployRate2(Map<String, String> param);
+
 }

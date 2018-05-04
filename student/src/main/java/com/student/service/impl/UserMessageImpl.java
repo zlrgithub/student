@@ -77,5 +77,9 @@ public class UserMessageImpl implements IUserMessage{
 		map.put("userId", string);
 		return userMessageMapper.selectByPageAndUserId(map);
 	}
+	@Override
+	public List<CityInfo> selectEmployRate2(Map<String, String> param) {
+		return userMessageMapper.selectEmployRate2(param);
+	}
 	
 }

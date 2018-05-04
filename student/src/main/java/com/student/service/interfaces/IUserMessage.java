@@ -20,4 +20,5 @@ public interface IUserMessage {
 	Long countBySelectByMe(Map<String, String> example);
 	List<UserMessage> selectByPage(int i, int j);
 	List<UserMessage> selectByPageAndUserId(int i, int j, String string);
+	List<CityInfo> selectEmployRate2(Map<String, String> param);
 }
