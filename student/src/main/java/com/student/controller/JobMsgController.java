@@ -58,7 +58,7 @@ public class JobMsgController {
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
 		String now = format.format(date);
 		logger.info(""+ now );
-		example.createCriteria().andCreatetimeGreaterThanOrEqualTo(now);
+		example.createCriteria().andEndtimeGreaterThanOrEqualTo(now);
 		Long total =  jobInfoMapper.countByExample(example);
 		Long page =  total/10;
 		if( total%10 != 0 ){
