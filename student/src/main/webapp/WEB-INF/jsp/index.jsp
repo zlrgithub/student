@@ -17,8 +17,8 @@
  	<div class="page-container">
     	<img src="image/index/index3.png" />
         <form action="./user/login" method="post">
-        	<input type="text" name="name" placeholder="Username"  onchange="pass()">
-            <input id="password" type="text" name="password" placeholder="Password">
+        	<input id="username" type="text" name="name" placeholder="Username"  onchange="pass()" onblur="check()"><span id='alr'></span>
+            <input id="password" type="text" name="password" placeholder="Password" onblur="check2()"><span id='alr2'></span>
             <select name = 'roleType' id="roleType">
 				<option value = "学生">学生</option>
 				<option value = "企业人员">企业人员</option>

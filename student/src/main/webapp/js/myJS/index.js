@@ -5,7 +5,22 @@ function register(){
 function pass() {
 	document.getElementById("password").type = "password"
 }
-
+function check(){
+	var vals = document.getElementById("username").value;
+	if(vals.length<11){
+		document.getElementById("alr").innerText='用户名不正确'
+	}else{
+		document.getElementById("alr").innerText="";
+	}
+}
+function check2(){
+	var vals = document.getElementById("password").value;
+	if(vals == '' || vals=='Password'){
+		document.getElementById("alr2").innerText='密码不正确'
+	}else{
+		document.getElementById("alr2").innerText="";
+	}
+}
 $.ready(function() {
     $('.page-container form').submit(function(){
         var username = $(this).find('.username').val();

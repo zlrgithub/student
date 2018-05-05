@@ -27,15 +27,15 @@
 			</tr>
 			<tr>
 				<td class = "td">用户名：</td>
-				<td><input name="name" type="text"></input></td>
+				<td><input  id = "name" name="name" type="text" onblur="check1()"></input><span id="alr1"></span></td>
 			</tr>
 			<tr>
 				<td class = "td">密码：</td>
-				<td><input name="password" type="text"></input></td>
+				<td><input id = "password" name="password" type="text" onblur="check2()" onchange="pass()"></input><span id="alr2"></span></td>
 			</tr>
 			<tr>
 				<td class = "td">确认密码：</td>
-				<td><input name="password2" type="text"></input></td>
+				<td><input id = "password2" name="password2" type="text" onblur="check3()" onchange="pass()"></input><span id="alr3"></span></td>
 			</tr>
 			<tr>
 				<td class = "td">用户类型：</td>
@@ -43,13 +43,12 @@
 					<select name = 'roleType' id="roleType">
 						<option value = "学生">学生</option>
 						<option value = "企业人员">企业人员</option>
-						<option value = "管理员">管理员</option>
 					</select>
 				</td>
 			</tr>
 		</table>
 		<div style="padding-left: 10px">
-			<button type="submit">注册</button>
+			<button id = "button" type="button" onclick="check4()">注册</button>
 			<button id = "cancel" type="reset" onclick="turnback()">返回</button>
 		</div>
 	</div>

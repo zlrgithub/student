@@ -62,7 +62,7 @@ public class UserController {
 	private User user;
 	private UserMessage userMessage;
 	Date date = new Date();
-	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyymmdd");
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 	
 	Logger logger = Logger.getLogger(UserController.class);
     @RequestMapping("/insertUser")

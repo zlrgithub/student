@@ -98,24 +98,32 @@ function companyTypeandJob(cityData){
 		    {
 		    	name: [],
 		        data: [],
+		        radius : '50%',
+	            center: ['50%', '60%'],
 		        itemStyle : { normal: {label : {show: true,formatter: '{b}{d}%'}}},
 		        type: 'pie'
 		    },
 		    {
 		    	name: [],
 		        data: [],
+		        radius : '50%',
+	            center: ['50%', '60%'],
 		        itemStyle : { normal: {label : {show: true,formatter: '{b}{d}%'}}},
 		        type: 'pie'
 		    },
 		    {
 		    	name: [],
 		        data: [],
+		        radius : '50%',
+	            center: ['50%', '60%'],
 		        itemStyle : { normal: {label : {show: true,formatter: '{b}{d}%'}}},
 		        type: 'pie',
 		    },
 		    {
 		    	name: [],
 		        data: [],
+		        radius : '50%',
+	            center: ['50%', '60%'],
 		        itemStyle : { normal: {label : {show: true,formatter: '{b}{d}%'}}},
 		        type: 'pie'
 		    }]
