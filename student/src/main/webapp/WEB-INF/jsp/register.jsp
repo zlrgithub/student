@@ -48,7 +48,7 @@
 			</tr>
 		</table>
 		<div style="padding-left: 10px">
-			<button id = "button" type="button" onclick="check4()">注册</button>
+			<button class="button2"  id = "button" type="button" onclick="check4()">注册</button>
 			<button id = "cancel" type="reset" onclick="turnback()">返回</button>
 		</div>
 	</div>

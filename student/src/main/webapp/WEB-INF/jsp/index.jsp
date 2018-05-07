@@ -17,13 +17,15 @@
  	<div class="page-container">
     	<img src="image/index/index3.png" />
         <form action="./user/login" method="post">
-        	<input id="username" type="text" name="name" placeholder="Username"  onchange="pass()" onblur="check()"><span id='alr'></span>
-            <input id="password" type="text" name="password" placeholder="Password" onblur="check2()"><span id='alr2'></span>
+        	<input id="username" type="text" name="name" placeholder="Username"  onchange="pass()" onblur="check()">
+        	<span id='alr'></span>
+            <input id="password" type="text" name="password" placeholder="Password" onblur="check2()">
+            <span id='alr2'></span>
             <select name = 'roleType' id="roleType">
 				<option value = "学生">学生</option>
 				<option value = "企业人员">企业人员</option>
 				<option value = "管理员">管理员</option>
-			</select>
+			</select><br>
             <button type="submit">Sign In</button>
             <button type="button" onclick="register()">Regist</button>
             <div class="error"><span>+</span></div>
