@@ -27,7 +27,7 @@
 				style="display: none" id = "redo"onclick="obj.redo()">取消编辑</a>
 		</div>
 		<div>
-			工作名称：<input type="text" name = "jobName">
+			账号：<input type="text" name = "jobName">
 			<!-- 创建时间:<input class="easyui-datebox" type="text" name="createTime">
 			到<input class="easyui-datebox" type="text" name="endTime"> -->
 			<a href="#" class="easyui-linkbutton" iconCls = "icon-search" plain = "true" onclick="obj.search()">查询</a>

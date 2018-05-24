@@ -540,7 +540,7 @@ public class ShowMsgController {
 	    	for( int i = 0 ; i < releaseJobInfos.size() ; i++ ){
 	    		Date createdate = dFormat.parse(releaseJobInfos.get(i).getCreatetime());
 	    		releaseJobInfos.get(i).setCreatetime(dateFormat.format(createdate));
-	    		Date enddate = dFormat.parse(releaseJobInfos.get(i).getCreatetime());
+	    		Date enddate = dFormat.parse(releaseJobInfos.get(i).getEndtime());
 	    		releaseJobInfos.get(i).setEndtime(dateFormat.format(enddate));
 	    	}
 	    	map.put("total", total);
