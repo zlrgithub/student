@@ -64,7 +64,7 @@ public class JobMsgController {
 		if( total%10 != 0 ){
 			page=page+1;
 		}
-		Map<String, Long> map = new HashMap<>();
+		Map<String, Long> map = new HashMap<String, Long>();
 		map.put("total", total);
 		map.put("page", page);
 		logger.info(""+JSON.parse(JSON.toJSONString(map)));

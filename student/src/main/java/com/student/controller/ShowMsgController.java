@@ -120,21 +120,21 @@ public class ShowMsgController {
 		Calendar date = Calendar.getInstance();
         String year = String.valueOf(date.get(Calendar.YEAR));
 		String cityName = (String)session.getAttribute("cityName");
-		Map<String, List> cityInfo = new HashMap<>();
+		Map<String, List> cityInfo = new HashMap<String, List>();
 		/*省级数据处理开始*/
 		
 		//获取毕业人数
-		param = new HashMap<>();
+		param = new HashMap<String, String>();
 		param.put("cityName", cityName);
 		param.put("year", year);
 		List<CityInfo> successiveGraduation = iUserMessage.selectCityInfo(param);
 		cityInfo.put("successiveGraduation", successiveGraduation);
 		
 		//就业、深造、不确定变化
-		param = new HashMap<>();
+		param = new HashMap<String, String>();
 		param.put("cityName", cityName);
 		param.put("year", year);
-		List<List<CityInfo>> threeTypeChanege = new ArrayList<>();
+		List<List<CityInfo>> threeTypeChanege = new ArrayList<List<CityInfo>>();
 		param.put("noJobInfo", "and work not in ('继续深造','未确定')");
 		List<CityInfo> workChange = iUserMessage.selectCityInfo(param);
 		param.put("noJobInfo", "and work = '继续深造'");
@@ -146,21 +146,21 @@ public class ShowMsgController {
 		threeTypeChanege.add(unknowChange);
 		cityInfo.put("threeTypeChange", threeTypeChanege);
 		//就业率变化
-		param = new HashMap<>();
+		param = new HashMap<String, String>();
 		param.put("cityName", cityName);
 		param.put("year", year);
 		param.put("noJobInfo", "and work not in ('继续深造','未确定')");
 		List<CityInfo> employmentRate = iUserMessage.selectEmployRate(param);
 		cityInfo.put("employmentRate", employmentRate);
 		//是否从事本专业
-		param = new HashMap<>();
+		param = new HashMap<String, String>();
 		param.put("cityName", cityName);
 		param.put("year", year);
 		param.put("noJobInfo", "and is_major = 1 ");
 		List<CityInfo> isMajorJob = iUserMessage.selectEmployRate2(param);
 		cityInfo.put("isMajorJob", isMajorJob);
 		//实习与就业关系
-		param = new HashMap<>();
+		param = new HashMap<String, String>();
 		param.put("factors", "is_train");
 		param.put("cityName", cityName);
 		param.put("year", year);
@@ -168,7 +168,7 @@ public class ShowMsgController {
 		List<CityInfo> trainAndJob = iUserMessage.selectTrainAndJob(param);
 		cityInfo.put("trainAndJob", trainAndJob);
 		//成绩与就业关系
-		param = new HashMap<>();
+		param = new HashMap<String, String>();
 		param.put("factors", "pref_standards");
 		param.put("cityName", cityName);
 		param.put("year", year);
@@ -176,12 +176,12 @@ public class ShowMsgController {
 		List<CityInfo> gradeAndJob = iUserMessage.selectTrainAndJob(param);
 		cityInfo.put("gradeAndJob", gradeAndJob);
 		//不同单位人数变化
-		param = new HashMap<>();
+		param = new HashMap<String, String>();
 		param.put("cityName", cityName);
 		param.put("year", year);
 		String[] noJobInfos = {"0","1","2","3","4","5","6"};
 		String[] comTypeInfo = {"国有企业","外资企业","私有企业","事业单位","股份制公司","合资企业","上市公司"};
-		List<List<CityInfo>> compTypeAndJobs = new ArrayList<>();
+		List<List<CityInfo>> compTypeAndJobs = new ArrayList<List<CityInfo>>();
 		for(int k=0 ;k< noJobInfos.length ; k++){
 			param.put("noJobInfo", "and company_type = " + noJobInfos[k]);
 			List<CityInfo> compTypeAndJob = iUserMessage.selectCityInfo(param);
@@ -221,7 +221,7 @@ public class ShowMsgController {
 		}
 		cityInfo.put("compTypeAndJobs", compTypeAndJobs);
 		//每年最热十大专业
-		param = new HashMap<>();
+		param = new HashMap<String, String>();
 		param.put("cityName", cityName);
 		param.put("year", year);
 		List<CityInfo> topTenJob = iUserMessage.selectTopTenJob(param);
@@ -238,12 +238,12 @@ public class ShowMsgController {
     					"安徽","山东","新疆","江苏","浙江","江西","湖北","广西","甘肃","山西","内蒙古","陕西",
     					"吉林","福建","贵州","广东","青海","西藏","四川","宁夏","海南","台湾","香港","澳门"};
     	WorkInfoMap infoMap ;
-    	List<WorkInfoMap> infoMapList = new ArrayList<>();
-    	List<WorkInfoMap> continueList = new ArrayList<>();
-    	List<WorkInfoMap> unknowList = new ArrayList<>();
+    	List<WorkInfoMap> infoMapList = new ArrayList<WorkInfoMap>();
+    	List<WorkInfoMap> continueList = new ArrayList<WorkInfoMap>();
+    	List<WorkInfoMap> unknowList = new ArrayList<WorkInfoMap>();
     	UserMessageExample example =new UserMessageExample();
     	Long num = 0L;
-    	List<String> noJobInfo = new ArrayList<>();
+    	List<String> noJobInfo = new ArrayList<String>();
     	noJobInfo.add("继续深造");
     	noJobInfo.add("未确定");
     	for ( int i = 0 ; i < workSpaceName.length; i++ ){
@@ -318,9 +318,9 @@ public class ShowMsgController {
     public @ResponseBody Object getSelectByMe(HttpServletRequest request,HttpServletResponse response) {
     	String selectInfos = request.getParameter("selectInfos");
     	Gson gson = new Gson();
-    	Map<String,String> example = new HashMap<>();
-    	Map<String,String> example2 = new HashMap<>();
-    	List<A> list = new ArrayList<>();
+    	Map<String,String> example = new HashMap<String,String>();
+    	Map<String,String> example2 = new HashMap<String,String>();
+    	List<A> list = new ArrayList<A>();
     	list = gson.fromJson(selectInfos, new TypeToken<List<A>>(){}.getType());
     	for( int i = 0 ;i < list.size() ; i++ ){
 	    	if( "gradTime".equals(list.get(i).name)){
@@ -417,7 +417,7 @@ public class ShowMsgController {
     	A b = new A();
     	b.setName(list.get(list.size()-1).name);
     	b.setValue(number2.toString());
-    	Map<String, A> num = new HashMap<>();
+    	Map<String, A> num = new HashMap<String, A>();
     	
     	num.put("perCount", a);
     	num.put("perCount2", b);
@@ -427,9 +427,9 @@ public class ShowMsgController {
     
     @RequestMapping(value = "/selectByMeIndex.do",method=RequestMethod.POST)
     public @ResponseBody Object getSelectByMeIndex(HttpServletRequest request,HttpServletResponse response) {
-    	List<SchoolInfo> schoolInfos = new ArrayList<>();
+    	List<SchoolInfo> schoolInfos = new ArrayList<SchoolInfo>();
     	schoolInfos = iSchool.selectSchoolInfo();
-    	Map<String,Set<String>> selectByMeIndex = new HashMap<>();
+    	Map<String,Set<String>> selectByMeIndex = new HashMap<String,Set<String>>();
     	Set<String> schoolNames = new HashSet<String>();
      	Set<String> majorNames = new HashSet<String>();
     	for (SchoolInfo schoolInfo : schoolInfos){
@@ -446,7 +446,7 @@ public class ShowMsgController {
     @RequestMapping(value = "/releaseJobInfoGet.do",method=RequestMethod.POST)
     public @ResponseBody Object releaseJobInfoGet(HttpServletRequest request,
     		HttpServletResponse response,int page,int rows,String jobName) throws ParseException {
-    	Map<String,Object> map = new HashMap<>();
+    	Map<String,Object> map = new HashMap<String,Object>();
     	HttpSession httpSession = request.getSession();
     	/*if( null == jobName ){
     		if( null == createTime ){
@@ -615,7 +615,7 @@ public class ShowMsgController {
     @RequestMapping(value = "/studentMsgGet.do",method=RequestMethod.POST)
     public @ResponseBody Object studentMsgGet(HttpServletRequest request,
     		HttpServletResponse response,int page,int rows,String uid) throws ParseException {
-    	Map<String,Object> map = new HashMap<>();
+    	Map<String,Object> map = new HashMap<String,Object>();
     	if( null == uid ){
     		List<User> releaseJobInfos = userInsert.selectByPage((page-1)*rows,page*rows);
 	    	UserExample example = new UserExample();
@@ -662,7 +662,7 @@ public class ShowMsgController {
     @RequestMapping(value = "/studentAccountGet.do",method=RequestMethod.POST)
     public @ResponseBody Object studentAccountGet(HttpServletRequest request,
     		HttpServletResponse response,int page,int rows,String uid) throws ParseException {
-    	Map<String,Object> map = new HashMap<>();
+    	Map<String,Object> map = new HashMap<String,Object>();
     	if( null == uid ){
     		List<UserMessage> releaseJobInfos = iUserMessage.selectByPage((page-1)*rows,page*rows);
 	    	UserMessageExample example = new UserMessageExample();
@@ -709,7 +709,7 @@ public class ShowMsgController {
     @RequestMapping(value = "/busiAccountGet.do",method=RequestMethod.POST)
     public @ResponseBody Object busiAccountGet(HttpServletRequest request,
     		HttpServletResponse response,int page,int rows,String uid) throws ParseException {
-    	Map<String,Object> map = new HashMap<>();
+    	Map<String,Object> map = new HashMap<String,Object>();
     	if( null == uid ){
     		List<businessUser> releaseJobInfos = iBusiUser.selectByPage((page-1)*rows,page*rows);
     		businessUserExample example = new businessUserExample();
@@ -756,7 +756,7 @@ public class ShowMsgController {
     @RequestMapping(value = "/busiMsgGet.do",method=RequestMethod.POST)
     public @ResponseBody Object busiMsgGet(HttpServletRequest request,
     		HttpServletResponse response,int page,int rows,String uid) throws ParseException {
-    	Map<String,Object> map = new HashMap<>();
+    	Map<String,Object> map = new HashMap<String,Object>();
     	if( null == uid ){
     		List<BusiUserMessage> releaseJobInfos = iBusiMsg.selectByPage((page-1)*rows,page*rows);
 	    	BusiUserMessageExample example = new BusiUserMessageExample();

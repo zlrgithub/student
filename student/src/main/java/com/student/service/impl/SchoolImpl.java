@@ -16,11 +16,9 @@ public class SchoolImpl implements ISchool{
 
 	@Resource
 	private SchoolInfoMapper infoMapper;
-	@Override
 	public void inert(SchoolInfo info) {
 		infoMapper.insert(info);
 	}
-	@Override
 	public List<SchoolInfo> selectSchoolInfo() {
 		return infoMapper.selectSchoolInfo();
 	}

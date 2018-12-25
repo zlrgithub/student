@@ -20,17 +20,15 @@ public class BusiMsgImpl implements IBusiMsg{
 	@Resource
 	BusiUserMessageMapper busiUserMessageMapper;
 	
-	@Override
 	public List<BusiUserMessage> selectByPage(int i, int j) {
-		Map<String,Integer> map = new HashMap<>();
+		Map<String,Integer> map = new HashMap<String,Integer>();
 		map.put("low", i);
 		map.put("height", j);
 		return busiUserMessageMapper.selectByPage(map);
 	}
 
-	@Override
 	public List<BusiUserMessage> selectByPageAndUserId(int i, int j, String string) {
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("low", i);
 		map.put("height", j);
 		map.put("userId", string);

@@ -20,16 +20,14 @@ public class BusiUserImpl implements IBusiUser{
 	@Resource
 	businessUserMapper businessUserMapper;
 	
-	@Override
 	public List<businessUser> selectByPage(int i, int j) {
-		Map<String,Integer> map = new HashMap<>();
+		Map<String,Integer> map = new HashMap<String,Integer>();
 		map.put("low", i);
 		map.put("height", j);
 		return businessUserMapper.selectByPage(map);
 	}
-	@Override
 	public List<businessUser> selectByPageAndUserId(int i, int j, String string) {
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("low", i);
 		map.put("height", j);
 		map.put("userId", string);
